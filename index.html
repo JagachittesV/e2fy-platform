@@ -1,0 +1,2084 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E2FY: Enrich Experience For Yog | The Unhackable Mind OS</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            900: '#134e4a',
+                        },
+                        accent: {
+                            purple: '#a855f7',
+                            cyan: '#06b6d4',
+                            gold: '#f59e0b',
+                            rose: '#f43f5e'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif']
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 15px rgba(168, 85, 247, 0.3)' },
+                            '100%': { boxShadow: '0 0 35px rgba(6, 182, 212, 0.6)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-primary: #0b0f19;
+            --bg-secondary: #0f172a;
+            --bg-tertiary: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --glass-bg: rgba(15, 23, 42, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        html.light {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #475569;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(15, 23, 42, 0.15);
+            --card-shadow: 0 10px 30px -5px rgba(0,0,0,0.08), 0 4px 12px -2px rgba(0,0,0,0.04);
+            --card-border: rgba(15, 23, 42, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+        
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            box-shadow: var(--card-shadow);
+        }
+
+        .glass-nav {
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Light mode specific WCAG AAA contrast overrides */
+        html.light .glass-nav {
+            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #a855f7 0%, #06b6d4 50%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        html.light .gradient-text {
+            background: linear-gradient(135deg, #6b21a8 0%, #0369a1 50%, #b45309 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        html.light .text-slate-300, 
+        html.light .text-slate-400 {
+            color: #334155 !important;
+        }
+
+        html.light .text-slate-200, 
+        html.light .text-slate-100 {
+            color: #0f172a !important;
+        }
+
+        html.light .text-slate-500 {
+            color: #475569 !important;
+        }
+
+        html.light .bg-slate-900,
+        html.light .bg-slate-950 {
+            background-color: #ffffff !important;
+        }
+
+        html.light .bg-slate-900\/50,
+        html.light .bg-slate-900\/60,
+        html.light .bg-slate-900\/80,
+        html.light .bg-slate-900\/90,
+        html.light .bg-slate-950\/80,
+        html.light .bg-slate-950\/90 {
+            background-color: rgba(241, 245, 249, 0.95) !important;
+        }
+
+        html.light .border-slate-800,
+        html.light .border-slate-700 {
+            border-color: #cbd5e1 !important;
+        }
+
+        html.light input,
+        html.light select,
+        html.light textarea {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        html.light input::placeholder {
+            color: #64748b !important;
+        }
+
+        .gradient-border {
+            position: relative;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(6, 182, 212, 0.4));
+            padding: 1px;
+        }
+        .gradient-border-inner {
+            border-radius: 0.95rem;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        html.light ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+
+        .page-transition {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        .page-hidden {
+            display: none;
+            opacity: 0;
+            transform: translateY(12px);
+        }
+        .page-visible {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 dark:bg-slate-950 dark:text-slate-100 light:bg-slate-50 light:text-slate-900 transition-colors duration-300 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-white">
+
+    <!-- Sticky Navigation Bar -->
+    <header class="sticky top-0 z-40 w-full glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo -->
+            <a href="#" onclick="navigateTo('home'); return false;" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-cyan-500 to-amber-400 p-[2px] shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform duration-300">
+                    <div class="w-full h-full bg-slate-950 dark:bg-slate-950 light:bg-white rounded-[10px] flex items-center justify-center">
+                        <i class="fa-solid font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 fa-atom text-xl"></i>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-2xl font-extrabold font-heading tracking-tight gradient-text">E2FY</span>
+                    <span class="block text-[10px] font-semibold text-slate-400 tracking-wider uppercase -mt-1">Enrich Experience For Yog</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-1 lg:gap-2 text-sm font-medium">
+                <button onclick="navigateTo('home')" id="nav-home" class="nav-btn px-3 py-2 rounded-lg text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-house text-xs"></i> Home
+                </button>
+                <button onclick="navigateTo('home', 'principles')" id="nav-principles" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-compass text-xs"></i> Principles
+                </button>
+                <button onclick="navigateTo('life')" id="nav-life" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-brain text-xs text-purple-400"></i> E2FY-Life
+                </button>
+                <button onclick="navigateTo('edu')" id="nav-edu" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap text-xs text-cyan-400"></i> E2FY-Edu
+                </button>
+                <button onclick="navigateTo('health')" id="nav-health" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-heart-pulse text-xs text-amber-400"></i> E2FY-Health 
+                    <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">SOON</span>
+                </button>
+                <button onclick="navigateTo('home', 'resources')" id="nav-resources" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-toolbox text-xs text-teal-400"></i> Resources
+                </button>
+                <button onclick="navigateTo('home', 'testimonials')" id="nav-testimonials" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-comments text-xs"></i> Reviews
+                </button>
+            </nav>
+
+            <!-- Desktop Actions Header Right -->
+            <div class="hidden md:flex items-center gap-3">
+                <button id="desktop-theme-toggle" onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 text-amber-400 flex items-center justify-center transition-all duration-200" title="Toggle Light/Dark Theme">
+                    <i class="fa-solid fa-moon text-base" id="theme-icon-desktop"></i>
+                </button>
+                <button onclick="openAuditModal()" class="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white shadow-lg shadow-purple-500/20 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-gauge-high"></i> Live Audit
+                </button>
+            </div>
+
+            <!-- Mobile Controls Right -->
+            <div class="flex items-center gap-2 md:hidden">
+                <button id="mobile-theme-toggle" onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 text-amber-400 flex items-center justify-center transition-all duration-200" title="Toggle Light/Dark Theme">
+                    <i class="fa-solid fa-moon text-base" id="theme-icon-mobile"></i>
+                </button>
+                <button onclick="toggleMobileMenu()" class="w-10 h-10 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 text-slate-200 flex items-center justify-center">
+                    <i class="fa-solid fa-bars text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-800 bg-slate-950/95 backdrop-blur-xl px-4 pt-2 pb-6 space-y-2">
+            <button onclick="navigateTo('home'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800 flex items-center gap-3">
+                <i class="fa-solid fa-house text-cyan-400 w-5"></i> Home
+            </button>
+            <button onclick="navigateTo('home', 'principles'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800 flex items-center gap-3">
+                <i class="fa-solid fa-compass text-purple-400 w-5"></i> E2FY Principles
+            </button>
+            <button onclick="navigateTo('life'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800 flex items-center gap-3">
+                <i class="fa-solid fa-brain text-purple-400 w-5"></i> E2FY-Life
+            </button>
+            <button onclick="navigateTo('edu'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800 flex items-center gap-3">
+                <i class="fa-solid fa-graduation-cap text-cyan-400 w-5"></i> E2FY-Edu
+            </button>
+            <button onclick="navigateTo('health'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800 flex items-center gap-3">
+                <i class="fa-solid fa-heart-pulse text-amber-400 w-5"></i> E2FY-Health <span class="text-[9px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30 ml-auto">SOON</span>
+            </button>
+            <button onclick="navigateTo('home', 'resources'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800 flex items-center gap-3">
+                <i class="fa-solid fa-toolbox text-teal-400 w-5"></i> Practitioner Resources
+            </button>
+            <button onclick="navigateTo('home', 'testimonials'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800 flex items-center gap-3">
+                <i class="fa-solid fa-comments text-amber-400 w-5"></i> Reviews &amp; Testimonials
+            </button>
+            <div class="pt-2">
+                <button onclick="openSampleChapter(); toggleMobileMenu();" class="w-full py-3 rounded-xl text-center font-semibold bg-gradient-to-r from-purple-600 to-cyan-500 text-white shadow-lg">
+                    <i class="fa-solid fa-book-open mr-2"></i> Read Sample Chapter
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN SINGLE PAGE APPLICATION VIEWS CONTAINER -->
+    <main class="flex-1">
+
+        <!-- ================= PAGE 1: HOME LANDING VIEW ================= -->
+        <div id="view-home" class="page-transition page-visible">
+            
+            <!-- Hero Section -->
+            <section class="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-32">
+                <!-- Background Ambient Glow Effects -->
+                <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-purple-600/20 via-cyan-500/20 to-amber-500/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+                
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        
+                        <!-- Left Hero Content -->
+                        <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                            
+                            <!-- Floating Tag Badge -->
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-purple-500/30 text-purple-300 text-xs font-semibold tracking-wide animate-pulse-slow shadow-lg shadow-purple-500/10">
+                                <span class="flex h-2 w-2 rounded-full bg-cyan-400 animate-ping"></span>
+                                <i class="fa-solid fa-shield-halved text-cyan-400"></i> The Next-Gen Human OS for Gen-Z &amp; Gen-Alpha
+                            </div>
+
+                            <!-- Main Headline -->
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-heading tracking-tight leading-[1.15]">
+                                Break the Code of You: <br>
+                                <span class="gradient-text">Upgrade to an Unhackable Mind</span>
+                            </h1>
+
+                            <p class="text-base sm:text-lg text-slate-300 dark:text-slate-300 light:text-slate-700 max-w-2xl leading-relaxed mx-auto lg:mx-0">
+                                Modern algorithms have hacked human attention spans, exam stress, and emotional peace. <strong>E2FY (Enrich Experience For Yog)</strong> translates 1,200-year-old Sanatana Dharma frameworks into an operating system backed by hard physics, neuroscience, and Adi Shankara’s dual-core logic.
+                            </p>
+
+                            <!-- CTAs -->
+                            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                                <button onclick="openVideoModal('master-trailer')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white shadow-lg shadow-purple-500/25 hover:shadow-cyan-500/30 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-3">
+                                    <i class="fa-solid fa-play text-sm"></i> Watch Master Trailer
+                                </button>
+                                <button onclick="navigateTo('life')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold glass-card hover:bg-slate-800/80 text-slate-100 border border-slate-700 transition-all duration-300 flex items-center justify-center gap-3">
+                                    <i class="fa-solid fa-book text-purple-400"></i> Explore Book Series
+                                </button>
+                            </div>
+
+                            <!-- Key Metrics Row -->
+                            <div class="pt-6 border-t border-slate-800/80 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-left">
+                                <div>
+                                    <span class="text-2xl font-extrabold font-heading text-cyan-400 block">16 Core</span>
+                                    <span class="text-xs text-slate-400 uppercase font-medium">Life-Algo Diagnostics</span>
+                                </div>
+                                <div>
+                                    <span class="text-2xl font-extrabold font-heading text-purple-400 block">71-Verse</span>
+                                    <span class="text-xs text-slate-400 uppercase font-medium">Dual-Core Engine</span>
+                                </div>
+                                <div>
+                                    <span class="text-2xl font-extrabold font-heading text-amber-400 block">100%</span>
+                                    <span class="text-xs text-slate-400 uppercase font-medium">Digital Resilience</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Graphic Card: Master Code Equation Card -->
+                        <div class="lg:col-span-5">
+                            <div class="relative mx-auto max-w-md">
+                                <div class="gradient-border shadow-2xl animate-float">
+                                    <div class="gradient-border-inner bg-slate-900/90 dark:bg-slate-900/95 light:bg-white p-6 sm:p-8 space-y-6">
+                                        
+                                        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                                            <div class="flex items-center gap-2">
+                                                <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                                                <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                                                <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                                            </div>
+                                            <span class="text-xs font-mono text-cyan-400"><i class="fa-solid fa-terminal mr-1"></i> E2FY-OS.v1</span>
+                                        </div>
+
+                                        <!-- Core Formula Display -->
+                                        <div>
+                                            <span class="text-xs font-bold text-slate-400 tracking-wider uppercase block mb-1">The Master Code Formula</span>
+                                            <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800 font-mono text-sm sm:text-base text-cyan-300 font-semibold shadow-inner">
+                                                MASTER_CODE = <span class="text-purple-400">Viveka</span> + <span class="text-cyan-400">Karma_Yog</span> + <span class="text-amber-400">Swarajya</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Module Breakdown Cards -->
+                                        <div class="space-y-3">
+                                            <div class="p-3 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xs shrink-0">01</div>
+                                                <div>
+                                                    <h4 class="text-xs font-bold text-purple-300">Viveka Firewall</h4>
+                                                    <p class="text-[11px] text-slate-400">Filters digital noise &amp; temporary identity metrics.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="p-3 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-xs shrink-0">02</div>
+                                                <div>
+                                                    <h4 class="text-xs font-bold text-cyan-300">Karma Yog Execution</h4>
+                                                    <p class="text-[11px] text-slate-400">100% current focus; surrenders outcome anxiety.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="p-3 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs shrink-0">03</div>
+                                                <div>
+                                                    <h4 class="text-xs font-bold text-amber-300">Swarajya Kernel</h4>
+                                                    <p class="text-[11px] text-slate-400">Unshakeable internal sovereignty immune to praise/blame.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Interactive Code Run Status -->
+                                        <div class="pt-2 flex items-center justify-between text-xs text-slate-400">
+                                            <span><i class="fa-solid fa-circle-check text-green-400 mr-1"></i> System Status: OPTIMAL</span>
+                                            <button onclick="openAuditModal()" class="text-cyan-400 hover:text-cyan-300 font-semibold underline">Run Diagnostics &rarr;</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Philosophy & Scientific Proofs Section -->
+            <section class="py-16 bg-slate-900/50 border-y border-slate-800/80">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <span class="text-xs font-bold text-purple-400 uppercase tracking-widest block mb-2">Systemic Reality Check</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold font-heading">
+                            Why Gen-Z &amp; Gen-Alpha Need E2FY
+                        </h2>
+                        <p class="mt-4 text-slate-300 text-sm sm:text-base leading-relaxed">
+                            You aren't typing into modern digital devices—an automated matrix is typing commands into your nervous system. Standard trial-and-error living generates burnout. E2FY aligns your actions with universal physics and spiritual intelligence.
+                        </p>
+                    </div>
+
+                    <!-- 3 Science Pillars Cards Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        
+                        <div class="glass-card p-6 sm:p-8 rounded-2xl hover:border-purple-500/40 transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl mb-6">
+                                <i class="fa-solid fa-microchip"></i>
+                            </div>
+                            <h3 class="text-xl font-bold font-heading text-purple-300 mb-3">Neuroscience &amp; Amygdala</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                The human prefrontal cortex consciously processes only <strong>40–50 bits per second</strong>. Relying on ego control against millions of environmental inputs causes amygdala panic and exam burnout.
+                            </p>
+                            <span class="text-xs font-semibold text-purple-400 inline-flex items-center gap-1">
+                                <i class="fa-solid fa-circle-nodes"></i> Bounded Rationality Law
+                            </span>
+                        </div>
+
+                        <div class="glass-card p-6 sm:p-8 rounded-2xl hover:border-cyan-500/40 transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl mb-6">
+                                <i class="fa-solid fa-atom"></i>
+                            </div>
+                            <h3 class="text-xl font-bold font-heading text-cyan-300 mb-3">Thermodynamics &amp; Entropy</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                In physics, isolated systems naturally accumulate entropy (disorder &amp; heat). Humans operating in total selfish ego isolation produce mental burnout and cellular stress.
+                            </p>
+                            <span class="text-xs font-semibold text-cyan-400 inline-flex items-center gap-1">
+                                <i class="fa-solid fa-fire-flame-curved"></i> Second Law of Physics
+                            </span>
+                        </div>
+
+                        <div class="glass-card p-6 sm:p-8 rounded-2xl hover:border-amber-500/40 transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl mb-6">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <h3 class="text-xl font-bold font-heading text-amber-300 mb-3">Chaos Theory &amp; Karma Yog</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Non-linear equations prove you can optimize your initial inputs, but you can never control all external variables. Surrendering outcomes is mathematically required for peace.
+                            </p>
+                            <span class="text-xs font-semibold text-amber-400 inline-flex items-center gap-1">
+                                <i class="fa-solid fa-infinity"></i> Non-Linear Systems Proof
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Principles Carousel Section -->
+            <section id="principles" class="py-20 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                        <div>
+                            <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest block mb-2">Operational Framework</span>
+                            <h2 class="text-3xl sm:text-4xl font-bold font-heading">The 5 Principles of E2FY</h2>
+                        </div>
+                        
+                        <!-- Carousel Nav Buttons -->
+                        <div class="flex items-center gap-3">
+                            <button onclick="prevPrinciple()" class="w-12 h-12 rounded-xl glass-card hover:bg-slate-800 flex items-center justify-center text-slate-200 transition-all border border-slate-700">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button onclick="nextPrinciple()" class="w-12 h-12 rounded-xl glass-card hover:bg-slate-800 flex items-center justify-center text-slate-200 transition-all border border-slate-700">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Principles Carousel Wrapper -->
+                    <div class="relative overflow-hidden rounded-3xl glass-card border border-slate-800 p-6 sm:p-10">
+                        <div id="principles-track" class="flex transition-transform duration-500 ease-in-out">
+                            
+                            <!-- Principle 1 -->
+                            <div class="w-full shrink-0 pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                                <div class="lg:col-span-7 space-y-4">
+                                    <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold">Principle 01 / 05</span>
+                                    <h3 class="text-2xl sm:text-3xl font-bold font-heading text-purple-300">The Master Code Architecture</h3>
+                                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                                        Synthesized from Adi Shankara’s logic, the Master Code replaces external algorithmic manipulation with three internal protocols: <strong>Viveka (Firewall)</strong> to identify permanent identity, <strong>Karma Yog (Execution)</strong> for 100% present focus, and <strong>Swarajya (Sovereignty)</strong> for unshakeable inner authority.
+                                    </p>
+                                    <div class="p-4 rounded-xl bg-slate-950/80 border border-purple-500/30 text-xs font-mono text-purple-200">
+                                        <i class="fa-solid fa-quote-left text-purple-400 mr-2"></i> Master Code = Viveka Firewall + Karma Yog Execution + Swarajya Kernel
+                                    </div>
+                                </div>
+                                <div class="lg:col-span-5 bg-gradient-to-br from-purple-900/30 to-slate-900 p-6 rounded-2xl border border-purple-500/20 text-center">
+                                    <i class="fa-solid fa-shield-halved text-5xl text-purple-400 mb-4 animate-bounce"></i>
+                                    <h4 class="font-bold text-white mb-2">Unhackable Mind Firewall</h4>
+                                    <p class="text-xs text-slate-400">Prevents external metrics from controlling your cortisol and self-worth.</p>
+                                </div>
+                            </div>
+
+                            <!-- Principle 2 -->
+                            <div class="w-full shrink-0 pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                                <div class="lg:col-span-7 space-y-4">
+                                    <span class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-bold">Principle 02 / 05</span>
+                                    <h3 class="text-2xl sm:text-3xl font-bold font-heading text-cyan-300">The Cosmic Interdependence Cycle</h3>
+                                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                                        Based on Bhagavad Gita Chapter 3, Verse 14 (<em>Annād bhavanti bhūtāni...</em>), nature operates as a continuous loop of rain, crops, and sustenance. Humans must perform <strong>Yajna (selfless duty)</strong> to keep the cosmic ecosystem in balance. Hoarding purely for personal ego breaks the wheel.
+                                    </p>
+                                    <div class="p-4 rounded-xl bg-slate-950/80 border border-cyan-500/30 text-xs font-mono text-cyan-200">
+                                        <i class="fa-solid fa-quote-left text-cyan-400 mr-2"></i> Duty (Yajna) &rarr; Cosmic Rain &rarr; Food &rarr; Life Sustenance
+                                    </div>
+                                </div>
+                                <div class="lg:col-span-5 bg-gradient-to-br from-cyan-900/30 to-slate-900 p-6 rounded-2xl border border-cyan-500/20 text-center">
+                                    <i class="fa-solid fa-arrows-spin text-5xl text-cyan-400 mb-4"></i>
+                                    <h4 class="font-bold text-white mb-2">The Cosmic Wheel</h4>
+                                    <p class="text-xs text-slate-400">Interdependence removes the isolation that causes modern anxiety.</p>
+                                </div>
+                            </div>
+
+                            <!-- Principle 3 -->
+                            <div class="w-full shrink-0 pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                                <div class="lg:col-span-7 space-y-4">
+                                    <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold">Principle 03 / 05</span>
+                                    <h3 class="text-2xl sm:text-3xl font-bold font-heading text-amber-300">Meditation in Action (Brahma-Karma)</h3>
+                                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                                        Derived from Bhagavad Gita Chapter 4, Verse 24 (<em>Brahmārpaṇaṁ Brahma Havir...</em>), work is transformed into active meditation. Your desk is the altar, your focus is the offering, and your client or exam recipient is a manifestation of the Divine.
+                                    </p>
+                                    <div class="p-4 rounded-xl bg-slate-950/80 border border-amber-500/30 text-xs font-mono text-amber-200">
+                                        <i class="fa-solid fa-quote-left text-amber-400 mr-2"></i> Work is divine. Tools are divine. The recipient is divine. You are divine.
+                                    </div>
+                                </div>
+                                <div class="lg:col-span-5 bg-gradient-to-br from-amber-900/30 to-slate-900 p-6 rounded-2xl border border-amber-500/20 text-center">
+                                    <i class="fa-solid fa-fire-burner text-5xl text-amber-400 mb-4"></i>
+                                    <h4 class="font-bold text-white mb-2">Work as Yajna</h4>
+                                    <p class="text-xs text-slate-400">Replaces workplace burnout with meditative flow states.</p>
+                                </div>
+                            </div>
+
+                            <!-- Principle 4 -->
+                            <div class="w-full shrink-0 pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                                <div class="lg:col-span-7 space-y-4">
+                                    <span class="px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold">Principle 04 / 05</span>
+                                    <h3 class="text-2xl sm:text-3xl font-bold font-heading text-rose-300">The Digital Amygdala Firewall</h3>
+                                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                                        Modern social media and exam panic trigger constant amygdala fights-or-flights. E2FY installs diagnostic queries to audit daily reactions, preventing notifications and peer comparisons from hijacking your focus.
+                                    </p>
+                                    <div class="p-4 rounded-xl bg-slate-950/80 border border-rose-500/30 text-xs font-mono text-rose-200">
+                                        <i class="fa-solid fa-quote-left text-rose-400 mr-2"></i> Debug social comparison before it reprograms your self-worth.
+                                    </div>
+                                </div>
+                                <div class="lg:col-span-5 bg-gradient-to-br from-rose-900/30 to-slate-900 p-6 rounded-2xl border border-rose-500/20 text-center">
+                                    <i class="fa-solid fa-ban-smoke text-5xl text-rose-400 mb-4"></i>
+                                    <h4 class="font-bold text-white mb-2">Anti-Panic Protocol</h4>
+                                    <p class="text-xs text-slate-400">Neutralizes exam fear and digital dopamine addiction.</p>
+                                </div>
+                            </div>
+
+                            <!-- Principle 5 -->
+                            <div class="w-full shrink-0 pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                                <div class="lg:col-span-7 space-y-4">
+                                    <span class="px-3 py-1 rounded-full bg-teal-500/20 text-teal-300 text-xs font-bold">Principle 05 / 05</span>
+                                    <h3 class="text-2xl sm:text-3xl font-bold font-heading text-teal-300">Sovereign Consciousness (Swarajya)</h3>
+                                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                                        Establish an unshakeable internal anchor. Your joy, purpose, and self-worth remain locked inside your own heart, completely immune to social media trends, peer comparison, and external machine manipulation.
+                                    </p>
+                                    <div class="p-4 rounded-xl bg-slate-950/80 border border-teal-500/30 text-xs font-mono text-teal-200">
+                                        <i class="fa-solid fa-quote-left text-teal-400 mr-2"></i> External inputs cannot command an unhackable mind.
+                                    </div>
+                                </div>
+                                <div class="lg:col-span-5 bg-gradient-to-br from-teal-900/30 to-slate-900 p-6 rounded-2xl border border-teal-500/20 text-center">
+                                    <i class="fa-solid fa-crown text-5xl text-teal-400 mb-4"></i>
+                                    <h4 class="font-bold text-white mb-2">Unshakeable Authority</h4>
+                                    <p class="text-xs text-slate-400">Total internal peace independent of external approval or metrics.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Principles Carousel Dots Indicator -->
+                        <div id="principles-dots" class="flex items-center justify-center gap-2 mt-6">
+                            <button onclick="goToPrinciple(0)" class="w-8 h-2 rounded-full bg-purple-500 transition-all cursor-pointer" aria-label="Principle 1"></button>
+                            <button onclick="goToPrinciple(1)" class="w-2 h-2 rounded-full bg-slate-700 hover:bg-slate-500 transition-all cursor-pointer" aria-label="Principle 2"></button>
+                            <button onclick="goToPrinciple(2)" class="w-2 h-2 rounded-full bg-slate-700 hover:bg-slate-500 transition-all cursor-pointer" aria-label="Principle 3"></button>
+                            <button onclick="goToPrinciple(3)" class="w-2 h-2 rounded-full bg-slate-700 hover:bg-slate-500 transition-all cursor-pointer" aria-label="Principle 4"></button>
+                            <button onclick="goToPrinciple(4)" class="w-2 h-2 rounded-full bg-slate-700 hover:bg-slate-500 transition-all cursor-pointer" aria-label="Principle 5"></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Practitioner Companion & Tracker Resources Section -->
+            <section id="resources" class="py-20 bg-slate-900/60 border-t border-slate-800 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <span class="text-xs font-bold text-teal-400 uppercase tracking-widest block mb-2">Diagnostic &amp; Implementation Suite</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold font-heading">Practitioner Companion &amp; Tracker Resources</h2>
+                        <p class="mt-4 text-slate-300 text-sm sm:text-base leading-relaxed">
+                            Transform theoretical E2FY and Sadhana Panchakam frameworks into daily habit loops. Access downloadable trackers, diagnostic cheat-sheets, and run an instant on-screen audit.
+                        </p>
+                    </div>
+
+                    <!-- 4 Resource Cards Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        
+                        <!-- Resource 1: Daily Diagnostic Checklist -->
+                        <div class="glass-card p-6 sm:p-8 rounded-2xl border border-purple-500/30 hover:border-purple-500/60 transition-all flex flex-col justify-between space-y-6">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-list-check"></i>
+                                    </div>
+                                    <span class="px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-bold uppercase tracking-wider border border-purple-500/30">Daily Protocol</span>
+                                </div>
+                                <h3 class="text-xl font-bold font-heading text-white">Practitioner's Daily Diagnostic Checklist</h3>
+                                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                                    A full diagnostic scanner auditing the 3 Master Code layers: <strong>Viveka Firewall</strong> (morning input protection), <strong>E2FY Execution Engine</strong> (100% current focus), and <strong>Swarajya Kernel</strong> (nightly reset).
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-800 flex flex-wrap items-center gap-3">
+                                <button onclick="openAuditModal()" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs transition-colors flex items-center gap-1.5">
+                                    <i class="fa-solid fa-gauge-high"></i> Open Live Audit
+                                </button>
+                                <button onclick="previewResource('checklist')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold text-xs transition-colors">
+                                    <i class="fa-solid fa-eye"></i> Preview
+                                </button>
+                                <button onclick="downloadPrintableTracker()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold text-xs transition-colors ml-auto">
+                                    <i class="fa-solid fa-print"></i> Download Sheet
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Resource 2: Weekly Swarajya Tracker Sheet -->
+                        <div class="glass-card p-6 sm:p-8 rounded-2xl border border-cyan-500/30 hover:border-cyan-500/60 transition-all flex flex-col justify-between space-y-6">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-calendar-week"></i>
+                                    </div>
+                                    <span class="px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-[10px] font-bold uppercase tracking-wider border border-cyan-500/30">Printable Template</span>
+                                </div>
+                                <h3 class="text-xl font-bold font-heading text-white">Weekly Swarajya Tracker Sheet</h3>
+                                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                                    A compact 2-page printable template combining the 6-block Sadhana Panchakam daily schedule with 9 core diagnostic queries and a weekly sovereignty score logging box.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-800 flex flex-wrap items-center gap-3">
+                                <button onclick="downloadPrintableTracker()" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition-colors flex items-center gap-1.5">
+                                    <i class="fa-solid fa-file-pdf"></i> Download PDF Tracker
+                                </button>
+                                <button onclick="previewResource('tracker')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold text-xs transition-colors">
+                                    <i class="fa-solid fa-eye"></i> Preview Sheet
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Resource 3: 71-Verse Optimization Cheat-Sheet -->
+                        <div class="glass-card p-6 sm:p-8 rounded-2xl border border-amber-500/30 hover:border-amber-500/60 transition-all flex flex-col justify-between space-y-6">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-file-code"></i>
+                                    </div>
+                                    <span class="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-[10px] font-bold uppercase tracking-wider border border-amber-500/30">Reference Matrix</span>
+                                </div>
+                                <h3 class="text-xl font-bold font-heading text-white">71-Verse System Optimization Cheat-Sheet</h3>
+                                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                                    Adi Shankara's <strong>Bhaja Govindam</strong> (31 Bug Scans) and <strong>Sadhana Panchakam</strong> (40 Action Updates) compiled into a high-density reference matrix mapped directly to modern digital life.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-800 flex flex-wrap items-center gap-3">
+                                <button onclick="previewResource('cheatsheet')" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs transition-colors flex items-center gap-1.5">
+                                    <i class="fa-solid fa-book-open"></i> Open Reference Matrix
+                                </button>
+                                <button onclick="downloadPrintableTracker()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold text-xs transition-colors">
+                                    <i class="fa-solid fa-download"></i> Save Matrix
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Resource 4: Master Code Formula Infographic -->
+                        <div class="glass-card p-6 sm:p-8 rounded-2xl border border-teal-500/30 hover:border-teal-500/60 transition-all flex flex-col justify-between space-y-6">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="w-12 h-12 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-diagram-project"></i>
+                                    </div>
+                                    <span class="px-2.5 py-1 rounded-full bg-teal-500/20 text-teal-300 text-[10px] font-bold uppercase tracking-wider border border-teal-500/30">Architecture Chart</span>
+                                </div>
+                                <h3 class="text-xl font-bold font-heading text-white">Master Code Architecture Infographic</h3>
+                                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                                    Visual architecture diagram illustrating the flow between Interdependence (Gita 3.14), Brahma-Karma (Gita 4.24), and Shankara's Dual-Core Processor.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-800 flex flex-wrap items-center gap-3">
+                                <button onclick="previewResource('infographic')" class="px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs transition-colors flex items-center gap-1.5">
+                                    <i class="fa-solid fa-image"></i> View Infographic
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reviews & Testimonials Section -->
+            <section id="testimonials" class="py-20 bg-slate-950 border-t border-slate-800/80">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <div class="text-center max-w-3xl mx-auto mb-12">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-2">Generation Feedback</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold font-heading">Practitioner Reviews &amp; Impact</h2>
+                        <p class="mt-4 text-slate-300 text-sm sm:text-base leading-relaxed">
+                            See how students, corporate executives, educators, and spiritual seekers use E2FY to format their minds and disarm stress.
+                        </p>
+                    </div>
+
+                    <!-- Category Filter Buttons -->
+                    <div class="flex flex-wrap items-center justify-center gap-2 mb-12">
+                        <button onclick="filterTestimonials('all')" class="testimonial-filter-btn px-4 py-2 rounded-xl bg-purple-600 text-white text-xs font-bold transition-all">All Reviews</button>
+                        <button onclick="filterTestimonials('student')" class="testimonial-filter-btn px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-bold transition-all">Gen-Z Students</button>
+                        <button onclick="filterTestimonials('executive')" class="testimonial-filter-btn px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-bold transition-all">Tech Executives</button>
+                        <button onclick="filterTestimonials('educator')" class="testimonial-filter-btn px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-bold transition-all">Educators</button>
+                        <button onclick="filterTestimonials('elder')" class="testimonial-filter-btn px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-bold transition-all">Elders &amp; Seekers</button>
+                    </div>
+
+                    <!-- Testimonials Cards Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="testimonials-grid">
+                        
+                        <!-- Testimonial 1 -->
+                        <div class="testimonial-card glass-card p-6 rounded-2xl border border-slate-800 space-y-4" data-category="student">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed italic">
+                                "Before reading E2FY-Edu, JEE exam preparation felt like torture. Applying Karma Yog execution completely cured my exam panic. I view studying as my offering now."
+                            </p>
+                            <div class="pt-4 border-t border-slate-800 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center text-xs">
+                                    AR
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-xs">Ananya Rao</h4>
+                                    <span class="text-[10px] text-slate-400">Engineering Student (Gen-Z)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 2 -->
+                        <div class="testimonial-card glass-card p-6 rounded-2xl border border-slate-800 space-y-4" data-category="executive">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed italic">
+                                "The Master Code equation (Viveka + Karma Yog + Swarajya) is the most logical operating system I've ever deployed. It eliminated corporate burnout completely."
+                            </p>
+                            <div class="pt-4 border-t border-slate-800 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-purple-500/20 text-purple-400 font-bold flex items-center justify-center text-xs">
+                                    VK
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-xs">Vikram Kapoor</h4>
+                                    <span class="text-[10px] text-slate-400">VP of Engineering &amp; AI Architect</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 3 -->
+                        <div class="testimonial-card glass-card p-6 rounded-2xl border border-slate-800 space-y-4" data-category="educator">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed italic">
+                                "E2FY bridges ancient Sanatana Dharma with neuroscience seamlessly. We introduced the daily diagnostic checklist to 400 university undergraduates."
+                            </p>
+                            <div class="pt-4 border-t border-slate-800 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-teal-500/20 text-teal-400 font-bold flex items-center justify-center text-xs">
+                                    SM
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-xs">Dr. Savitha Mehta</h4>
+                                    <span class="text-[10px] text-slate-400">Professor of Cognitive Science</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ================= PAGE 2: E2FY-LIFE SUB-PAGE ================= -->
+        <div id="view-life" class="page-transition page-hidden">
+            
+            <section class="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div>
+                    <button onclick="navigateTo('home')" class="text-xs font-semibold text-purple-400 hover:text-purple-300 inline-flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Platform Overview
+                    </button>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-800 pb-8">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold border border-purple-500/30">Available Worldwide</span>
+                            <h1 class="text-3xl sm:text-5xl font-extrabold font-heading text-white mt-3">E2FY-LIFE</h1>
+                            <p class="text-base text-purple-300 font-medium">The Unhackable Mind OS in an Automated Matrix</p>
+                        </div>
+                        <button onclick="openVideoModal('life-1')" class="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-sm shadow-lg shadow-purple-500/20 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-play"></i> Watch Series Trailer
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Book Summary Paragraph -->
+                <div class="glass-card p-6 sm:p-8 rounded-2xl border border-purple-500/30 space-y-4">
+                    <h3 class="text-xl font-bold font-heading text-purple-300">About E2FY-Life</h3>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Modern algorithms have quietly typed commands into human nervous systems—triggering notifications, peer comparison, and anxiety loops. <strong>E2FY-Life</strong> introduces the 1,200-year-old operational framework synthesized from Adi Shankara's logic to debug daily stress and make your consciousness entirely unhackable.
+                    </p>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        By initializing the 3 core layers—<strong>Viveka Firewall</strong> (filtering digital inputs), <strong>Karma Yog Execution</strong> (100% current focus without outcome anxiety), and <strong>Swarajya Kernel</strong> (unshakeable internal sovereignty)—E2FY-Life translates classical Sanatana wisdom into an actionable survival guide for Gen-Z, Gen-Alpha, working adults, and leaders.
+                    </p>
+                </div>
+
+                <!-- 3 Embedded Video Trailers Grid -->
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold font-heading text-white flex items-center gap-2">
+                        <i class="fa-solid fa-film text-purple-400"></i> Video Trailer Series (3 Episodes)
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <!-- Trailer Card 1 -->
+                        <div class="glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-purple-500/50 transition-all group">
+                            <div class="relative h-44 bg-gradient-to-tr from-purple-950 via-slate-900 to-slate-950 flex items-center justify-center p-4">
+                                <div class="w-12 h-12 rounded-full bg-purple-600 text-white flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition-transform cursor-pointer" onclick="openVideoModal('life-1')">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </div>
+                                <span class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-slate-950/80 text-[10px] font-mono text-purple-300 border border-purple-500/30">2:45 MIN</span>
+                            </div>
+                            <div class="p-5 space-y-2">
+                                <h4 class="font-bold text-white text-sm">Ep 01: The Matrix in Your Pocket</h4>
+                                <p class="text-xs text-slate-400 line-clamp-2">How predatory algorithms hijack attention and how to deploy the Viveka Firewall.</p>
+                                <button onclick="openVideoModal('life-1')" class="text-xs font-semibold text-purple-400 hover:text-purple-300 pt-2 block">Watch Episode 01 &rarr;</button>
+                            </div>
+                        </div>
+
+                        <!-- Trailer Card 2 -->
+                        <div class="glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-purple-500/50 transition-all group">
+                            <div class="relative h-44 bg-gradient-to-tr from-indigo-950 via-slate-900 to-slate-950 flex items-center justify-center p-4">
+                                <div class="w-12 h-12 rounded-full bg-purple-600 text-white flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition-transform cursor-pointer" onclick="openVideoModal('life-2')">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </div>
+                                <span class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-slate-950/80 text-[10px] font-mono text-purple-300 border border-purple-500/30">3:12 MIN</span>
+                            </div>
+                            <div class="p-5 space-y-2">
+                                <h4 class="font-bold text-white text-sm">Ep 02: The Grand Master Question</h4>
+                                <p class="text-xs text-slate-400 line-clamp-2">Deconstructing Cosmic Interdependence (Gita 3.14) and Brahma-Karma action (Gita 4.24).</p>
+                                <button onclick="openVideoModal('life-2')" class="text-xs font-semibold text-purple-400 hover:text-purple-300 pt-2 block">Watch Episode 02 &rarr;</button>
+                            </div>
+                        </div>
+
+                        <!-- Trailer Card 3 -->
+                        <div class="glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-purple-500/50 transition-all group">
+                            <div class="relative h-44 bg-gradient-to-tr from-cyan-950 via-slate-900 to-slate-950 flex items-center justify-center p-4">
+                                <div class="w-12 h-12 rounded-full bg-purple-600 text-white flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition-transform cursor-pointer" onclick="openVideoModal('life-3')">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </div>
+                                <span class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-slate-950/80 text-[10px] font-mono text-purple-300 border border-purple-500/30">2:18 MIN</span>
+                            </div>
+                            <div class="p-5 space-y-2">
+                                <h4 class="font-bold text-white text-sm">Ep 03: The Swarajya Kernel</h4>
+                                <p class="text-xs text-slate-400 line-clamp-2">Establishing unshakeable self-sovereignty immune to external praise or blame.</p>
+                                <button onclick="openVideoModal('life-3')" class="text-xs font-semibold text-purple-400 hover:text-purple-300 pt-2 block">Watch Episode 03 &rarr;</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Buy Links Section -->
+                <div class="p-8 rounded-2xl bg-gradient-to-r from-purple-900/30 via-slate-900 to-slate-950 border border-purple-500/30 text-center space-y-6">
+                    <h3 class="text-2xl font-bold font-heading text-white">Get E2FY-Life Book &amp; Companion Guide</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">Available worldwide in Paperback, Hardcover, Kindle eBook, and Audio Edition.</p>
+                    
+                    <div class="flex flex-wrap items-center justify-center gap-4">
+                        <button onclick="triggerBuyAction('Amazon')" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-amazon text-base"></i> Buy on Amazon
+                        </button>
+                        <button onclick="triggerBuyAction('Google Play')" class="px-6 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-google-play text-base"></i> Google Play Books
+                        </button>
+                        <button onclick="triggerBuyAction('Apple Books')" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 font-bold text-xs transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-apple text-base"></i> Apple Books
+                        </button>
+                    </div>
+                </div>
+
+                <!-- E2FY-Life Practitioner Companion Resource Box -->
+                <div class="glass-card p-6 sm:p-8 rounded-2xl border border-purple-500/30 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-bold font-heading text-purple-300"><i class="fa-solid fa-toolbox mr-2"></i> E2FY-Life Practitioner Companion Suite</h3>
+                        <span class="text-xs font-semibold text-purple-400">Included with Book</span>
+                    </div>
+                    <p class="text-slate-300 text-xs sm:text-sm">Includes 16 core diagnostic queries, 71-verse optimization cheat-sheet, and weekly printable Swarajya tracking sheets.</p>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <button onclick="openAuditModal()" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs transition-colors">
+                            <i class="fa-solid fa-list-check mr-1"></i> Open Live Diagnostic Scanner
+                        </button>
+                        <button onclick="downloadPrintableTracker()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold text-xs transition-colors">
+                            <i class="fa-solid fa-file-pdf mr-1"></i> Download Weekly Tracker PDF
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- ================= PAGE 3: E2FY-EDU SUB-PAGE ================= -->
+        <div id="view-edu" class="page-transition page-hidden">
+            
+            <section class="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div>
+                    <button onclick="navigateTo('home')" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Platform Overview
+                    </button>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-800 pb-8">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-bold border border-cyan-500/30">Available Now</span>
+                            <h1 class="text-3xl sm:text-5xl font-extrabold font-heading text-white mt-3">E2FY-EDU</h1>
+                            <p class="text-base text-cyan-300 font-medium">Education as Yajna: Disarming Exam Panic &amp; Rote Learning</p>
+                        </div>
+                        <button onclick="openVideoModal('edu-1')" class="px-6 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-sm shadow-lg shadow-cyan-500/20 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-play"></i> Watch Series Trailer
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Book Summary Paragraph -->
+                <div class="glass-card p-6 sm:p-8 rounded-2xl border border-cyan-500/30 space-y-4">
+                    <h3 class="text-xl font-bold font-heading text-cyan-300">About E2FY-Edu</h3>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        In an age where AI instantly passes competitive exams and answers complex queries, studying purely for rote memorization or competitive ranking causes severe student burnout. <strong>E2FY-Edu</strong> reframes education from an anxious chore into a sacred contribution (<em>Yajna Bhavana</em>).
+                    </p>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        By applying Gita 3.14 (Interdependence) and Gita 4.24 (Brahma-Karma), students convert their study desks into altars. When knowledge is treated as an offering to solve planetary challenges rather than a weapon against classmates, exam anxiety drops, focus deepens, and cognitive stamina multiplies.
+                    </p>
+                </div>
+
+                <!-- 3 Embedded Video Trailers Grid -->
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold font-heading text-white flex items-center gap-2">
+                        <i class="fa-solid fa-film text-cyan-400"></i> Student Trailer Series (3 Episodes)
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <!-- Trailer Card 1 -->
+                        <div class="glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 transition-all group">
+                            <div class="relative h-44 bg-gradient-to-tr from-cyan-950 via-slate-900 to-slate-950 flex items-center justify-center p-4">
+                                <div class="w-12 h-12 rounded-full bg-cyan-600 text-white flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition-transform cursor-pointer" onclick="openVideoModal('edu-1')">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </div>
+                                <span class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-slate-950/80 text-[10px] font-mono text-cyan-300 border border-cyan-500/30">2:30 MIN</span>
+                            </div>
+                            <div class="p-5 space-y-2">
+                                <h4 class="font-bold text-white text-sm">Ep 01: Beyond Rote Learning</h4>
+                                <p class="text-xs text-slate-400 line-clamp-2">Transitioning from mechanical memorization to genuine societal problem-solving.</p>
+                                <button onclick="openVideoModal('edu-1')" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300 pt-2 block">Watch Episode 01 &rarr;</button>
+                            </div>
+                        </div>
+
+                        <!-- Trailer Card 2 -->
+                        <div class="glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 transition-all group">
+                            <div class="relative h-44 bg-gradient-to-tr from-blue-950 via-slate-900 to-slate-950 flex items-center justify-center p-4">
+                                <div class="w-12 h-12 rounded-full bg-cyan-600 text-white flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition-transform cursor-pointer" onclick="openVideoModal('edu-2')">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </div>
+                                <span class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-slate-950/80 text-[10px] font-mono text-cyan-300 border border-cyan-500/30">3:05 MIN</span>
+                            </div>
+                            <div class="p-5 space-y-2">
+                                <h4 class="font-bold text-white text-sm">Ep 02: Exam Panic Firewall</h4>
+                                <p class="text-xs text-slate-400 line-clamp-2">Disarming pre-exam amygdala fight-or-flight through outcome detachment.</p>
+                                <button onclick="openVideoModal('edu-2')" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300 pt-2 block">Watch Episode 02 &rarr;</button>
+                            </div>
+                        </div>
+
+                        <!-- Trailer Card 3 -->
+                        <div class="glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 transition-all group">
+                            <div class="relative h-44 bg-gradient-to-tr from-teal-950 via-slate-900 to-slate-950 flex items-center justify-center p-4">
+                                <div class="w-12 h-12 rounded-full bg-cyan-600 text-white flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition-transform cursor-pointer" onclick="openVideoModal('edu-3')">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </div>
+                                <span class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-slate-950/80 text-[10px] font-mono text-cyan-300 border border-cyan-500/30">2:50 MIN</span>
+                            </div>
+                            <div class="p-5 space-y-2">
+                                <h4 class="font-bold text-white text-sm">Ep 03: Student Karma Yog</h4>
+                                <p class="text-xs text-slate-400 line-clamp-2">Practical daily rituals turning study sessions into active meditation.</p>
+                                <button onclick="openVideoModal('edu-3')" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300 pt-2 block">Watch Episode 03 &rarr;</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Buy Links Section -->
+                <div class="p-8 rounded-2xl bg-gradient-to-r from-cyan-900/30 via-slate-900 to-slate-950 border border-cyan-500/30 text-center space-y-6">
+                    <h3 class="text-2xl font-bold font-heading text-white">Get E2FY-Edu for Students &amp; Educators</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">Available for school libraries, university students, and self-study practitioners.</p>
+                    
+                    <div class="flex flex-wrap items-center justify-center gap-4">
+                        <button onclick="triggerBuyAction('Amazon')" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-amazon text-base"></i> Buy on Amazon
+                        </button>
+                        <button onclick="triggerBuyAction('Google Play')" class="px-6 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-google-play text-base"></i> Google Play Books
+                        </button>
+                    </div>
+                </div>
+
+                <!-- E2FY-Edu Companion Resources Widget -->
+                <div class="glass-card p-6 sm:p-8 rounded-2xl border border-cyan-500/30 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-bold font-heading text-cyan-300"><i class="fa-solid fa-graduation-cap mr-2"></i> E2FY-Edu Student Implementation Kit</h3>
+                        <span class="text-xs font-semibold text-cyan-400">Included with Book</span>
+                    </div>
+                    <p class="text-slate-300 text-xs sm:text-sm">Includes Student Karma Yog study desk templates, Exam Panic disarming cheat-sheets, and printable weekly routines.</p>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <button onclick="openAuditModal()" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition-colors">
+                            <i class="fa-solid fa-list-check mr-1"></i> Audit Student Routine
+                        </button>
+                        <button onclick="downloadPrintableTracker()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold text-xs transition-colors">
+                            <i class="fa-solid fa-file-pdf mr-1"></i> Download Student Tracker PDF
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- ================= PAGE 4: E2FY-HEALTH SUB-PAGE ================= -->
+        <div id="view-health" class="page-transition page-hidden">
+            
+            <section class="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div>
+                    <button onclick="navigateTo('home')" class="text-xs font-semibold text-amber-400 hover:text-amber-300 inline-flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Platform Overview
+                    </button>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-800 pb-8">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold border border-amber-500/30 animate-pulse">Coming Soon</span>
+                            <h1 class="text-3xl sm:text-5xl font-extrabold font-heading text-white mt-3">E2FY-HEALTH</h1>
+                            <p class="text-base text-amber-300 font-medium">Biological Thermodynamics &amp; Sovereign Longevity</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teaser Hero Card -->
+                <div class="glass-card p-8 rounded-2xl border border-amber-500/30 space-y-6 text-center max-w-3xl mx-auto">
+                    <div class="w-16 h-16 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl mx-auto">
+                        <i class="fa-solid fa-dna animate-pulse"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold font-heading text-white">Cellular Physics Meets Sanatana Wisdom</h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Human cellular division is hard-coded by the <strong>Hayflick Limit</strong> to stop after 40–60 replications. Clinging to the physical shell as permanent violates cellular biology. E2FY-Health combines thermodynamics, cortisol regulation, and Shankara's protocols to minimize biological entropy and prolong functional vitality.
+                    </p>
+
+                    <!-- Early Access Form -->
+                    <form onsubmit="handleNotifySubmit(event)" class="pt-4 max-w-md mx-auto space-y-3">
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <input type="email" id="notify-email" required placeholder="Enter your email for early access..." class="flex-1 px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-500">
+                            <button type="submit" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-colors shrink-0">
+                                <i class="fa-solid fa-bell mr-1"></i> Notify Me
+                            </button>
+                        </div>
+                        <span class="text-[11px] text-slate-400 block">Join 4,500+ practitioners registered for launch updates.</span>
+                    </form>
+                </div>
+
+                <!-- 3 Teaser Episode Cards -->
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold font-heading text-white flex items-center gap-2">
+                        <i class="fa-solid fa-clapperboard text-amber-400"></i> Teaser Trailer Previews
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-3">
+                            <span class="text-xs font-bold text-amber-400">Teaser 01</span>
+                            <h4 class="font-bold text-white text-base">Biological Thermodynamics</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">How reducing internal ego friction directly lowers systemic entropy and cellular heat decay.</p>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-3">
+                            <span class="text-xs font-bold text-amber-400">Teaser 02</span>
+                            <h4 class="font-bold text-white text-base">Stress-Free Nervous System</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">Modulating cortisol and amygdala responses through Karma Yog detachment protocols.</p>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-3">
+                            <span class="text-xs font-bold text-amber-400">Teaser 03</span>
+                            <h4 class="font-bold text-white text-base">Swarajya Longevity</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">Viewing aging not as terrifying decay, but as sovereign spiritual maturation.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- E2FY-Health Companion Resources Preview -->
+                <div class="glass-card p-6 sm:p-8 rounded-2xl border border-amber-500/30 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-bold font-heading text-amber-300"><i class="fa-solid fa-heart-pulse mr-2"></i> E2FY-Health Longevity Companion</h3>
+                        <span class="text-xs font-semibold text-amber-400">Pre-Release Access</span>
+                    </div>
+                    <p class="text-slate-300 text-xs sm:text-sm">Thermodynamic entropy charts, Hayflick limit cellular protocols, and autonomic nervous system regulation guides.</p>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <button onclick="openAuditModal()" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs transition-colors">
+                            <i class="fa-solid fa-gauge-high mr-1"></i> Try Early Longevity Audit
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- INTERACTIVE VIDEO TRAILER PLAYER MODAL -->
+    <div id="video-modal" class="fixed inset-0 z-50 hidden bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="relative w-full max-w-4xl glass-card rounded-2xl overflow-hidden border border-slate-700 shadow-2xl flex flex-col max-h-[92vh]">
+            
+            <!-- Video Modal Header -->
+            <div class="p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-3 w-3 rounded-full bg-red-500 animate-pulse"></span>
+                    <span id="video-modal-title" class="text-sm font-bold font-heading text-white truncate max-w-md">E2FY Video Trailer Player</span>
+                </div>
+                <button onclick="closeVideoModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Video Player Screen Body -->
+            <div class="relative bg-black h-64 sm:h-96 flex flex-col items-center justify-center overflow-hidden shrink-0 group">
+                
+                <!-- Animated Background Canvas Simulation -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-purple-950/80 via-slate-950 to-cyan-950/80 flex items-center justify-center opacity-90">
+                    <div class="flex items-end justify-center gap-1.5 h-20 w-48 opacity-40">
+                        <span class="w-2 bg-purple-500 rounded-full animate-bounce h-12"></span>
+                        <span class="w-2 bg-cyan-400 rounded-full animate-bounce h-20" style="animation-delay: 0.2s"></span>
+                        <span class="w-2 bg-indigo-500 rounded-full animate-bounce h-16" style="animation-delay: 0.4s"></span>
+                        <span class="w-2 bg-amber-400 rounded-full animate-bounce h-24" style="animation-delay: 0.1s"></span>
+                        <span class="w-2 bg-teal-400 rounded-full animate-bounce h-10" style="animation-delay: 0.3s"></span>
+                    </div>
+                </div>
+
+                <!-- Big Central Play Button -->
+                <button onclick="toggleSimulatedPlay()" class="relative z-10 w-20 h-20 rounded-full bg-gradient-to-tr from-purple-600 to-cyan-500 text-white flex items-center justify-center text-2xl shadow-2xl shadow-purple-500/50 hover:scale-110 transition-transform cursor-pointer">
+                    <i class="fa-solid fa-play ml-1" id="simulated-play-icon"></i>
+                </button>
+
+                <!-- Watermark Overlay -->
+                <div class="absolute top-4 left-4 z-10 flex items-center gap-2 bg-slate-950/70 px-3 py-1.5 rounded-lg border border-slate-800 backdrop-blur-sm text-xs font-mono text-cyan-300">
+                    <i class="fa-solid fa-atom"></i> E2FY-STUDIOS.v1
+                </div>
+
+                <!-- Custom Bottom Player Controls Bar -->
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent p-4 flex flex-col gap-2 z-10">
+                    
+                    <!-- Progress Bar -->
+                    <div class="w-full h-2 rounded-full bg-slate-800 cursor-pointer relative overflow-hidden" onclick="seekSimulatedVideo(event)">
+                        <div id="video-progress" class="h-full bg-gradient-to-r from-purple-500 to-cyan-400 w-0 transition-all duration-200"></div>
+                    </div>
+
+                    <!-- Control Buttons & Timestamp -->
+                    <div class="flex items-center justify-between text-xs text-slate-300">
+                        <div class="flex items-center gap-3">
+                            <button onclick="toggleSimulatedPlay()" class="hover:text-cyan-400 text-sm">
+                                <i class="fa-solid fa-play" id="controls-play-icon"></i>
+                            </button>
+                            <span id="video-time" class="font-mono text-[11px] text-slate-400">0:00 / 2:45</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-volume-high text-slate-400"></i>
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">HD 1080P</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Video Metadata & Transcript Panel -->
+            <div class="p-6 overflow-y-auto space-y-4 bg-slate-900/90 text-xs sm:text-sm text-slate-300 flex-1">
+                <div>
+                    <h4 class="font-bold text-white text-base mb-1" id="video-modal-title-sub">Episode Overview</h4>
+                    <p id="video-modal-desc" class="text-slate-300 leading-relaxed">Video description loading...</p>
+                </div>
+                
+                <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
+                    <span class="text-[10px] font-bold text-cyan-400 uppercase tracking-widest block"><i class="fa-solid fa-quote-left mr-1"></i> Key Transcript Quote:</span>
+                    <p id="video-modal-transcript" class="text-slate-300 italic">"Transcript loading..."</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- LIVE DIAGNOSTIC AUDIT MODAL OVERLAY -->
+    <div id="audit-modal" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="relative w-full max-w-2xl glass-card rounded-2xl overflow-hidden border border-slate-700 shadow-2xl space-y-0 flex flex-col max-h-[90vh]">
+            
+            <!-- Modal Header -->
+            <div class="p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-gauge-high text-cyan-400"></i>
+                    <span class="text-sm font-bold font-heading text-white">E2FY Live Mind OS Diagnostic Audit</span>
+                </div>
+                <button onclick="closeAuditModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content Body -->
+            <div class="p-6 overflow-y-auto space-y-6 text-slate-300 text-xs sm:text-sm flex-1" id="audit-body">
+                
+                <!-- Step 1: Input Questions -->
+                <div id="audit-questions" class="space-y-6">
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                        <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider block mb-1">Q1: Viveka Firewall (Morning Input Protocol)</span>
+                        <h4 class="font-bold text-white text-sm mb-3">How do you interact with your phone/notifications during your first 30 minutes awake?</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-purple-500/50 transition-colors">
+                                <input type="radio" name="q1" value="0" class="mt-0.5" checked>
+                                <span><strong>Option A:</strong> Check social media, emails, or news immediately (High Algorithmic Hijack).</span>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-purple-500/50 transition-colors">
+                                <input type="radio" name="q1" value="2" class="mt-0.5">
+                                <span><strong>Option B:</strong> Pause for 15-30 min of breathwork, reflection, and setting intention before touching screens.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                        <span class="text-[10px] font-bold text-cyan-400 uppercase tracking-wider block mb-1">Q2: Karma Yog (Work &amp; Study Bandwidth)</span>
+                        <h4 class="font-bold text-white text-sm mb-3">When studying for exams or working on major projects, where is your attention focused?</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-cyan-500/50 transition-colors">
+                                <input type="radio" name="q2" value="0" class="mt-0.5" checked>
+                                <span><strong>Option A:</strong> Obsessing over test ranks, boss reviews, and fear of failure.</span>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-cyan-500/50 transition-colors">
+                                <input type="radio" name="q2" value="2" class="mt-0.5">
+                                <span><strong>Option B:</strong> Directing 100% focus to quality of effort as an offering (Yajna), surrendering unmanageable outcomes.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                        <span class="text-[10px] font-bold text-amber-400 uppercase tracking-wider block mb-1">Q3: Friction Control (Chaos &amp; Amygdala)</span>
+                        <h4 class="font-bold text-white text-sm mb-3">How do you react when unexpected delays, failures, or online criticism occur?</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-amber-500/50 transition-colors">
+                                <input type="radio" name="q3" value="0" class="mt-0.5" checked>
+                                <span><strong>Option A:</strong> Amygdala panic, anger, blaming myself or others, feeling ruined.</span>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-amber-500/50 transition-colors">
+                                <input type="radio" name="q3" value="2" class="mt-0.5">
+                                <span><strong>Option B:</strong> Maintain calm non-linear problem solving, refine my inputs cleanly, and keep zero internal heat.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                        <span class="text-[10px] font-bold text-rose-400 uppercase tracking-wider block mb-1">Q4: Relational Interdependence (Gita 3.14 &amp; 4.24)</span>
+                        <h4 class="font-bold text-white text-sm mb-3">How do you approach relationships with peers, family, or colleagues?</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-rose-500/50 transition-colors">
+                                <input type="radio" name="q4" value="0" class="mt-0.5" checked>
+                                <span><strong>Option A:</strong> Transactional mindset ("I did this for you, so you owe me"), comparing status.</span>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-rose-500/50 transition-colors">
+                                <input type="radio" name="q4" value="2" class="mt-0.5">
+                                <span><strong>Option B:</strong> Recognizing mutual cosmic interdependence and serving the divine life-force in others.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                        <span class="text-[10px] font-bold text-teal-400 uppercase tracking-wider block mb-1">Q5: Swarajya Kernel (Nightly Reset)</span>
+                        <h4 class="font-bold text-white text-sm mb-3">How do you transition into sleep at the end of the day?</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-teal-500/50 transition-colors">
+                                <input type="radio" name="q5" value="0" class="mt-0.5" checked>
+                                <span><strong>Option A:</strong> Replaying anxieties, doomscrolling until passing out, feeling insecure.</span>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-teal-500/50 transition-colors">
+                                <input type="radio" name="q5" value="2" class="mt-0.5">
+                                <span><strong>Option B:</strong> Forgiving errors, releasing all outcomes into the macro-system, and resting in sovereign peace.</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Results Display Container -->
+                <div id="audit-results" class="hidden space-y-6 text-center">
+                    <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+                        <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest block">Your Sovereign Intelligence Index</span>
+                        <div class="text-5xl font-black font-heading text-white" id="score-display">0 / 10</div>
+                        <div class="text-sm font-bold" id="score-status">Calculating...</div>
+                        <p class="text-xs text-slate-300 max-w-md mx-auto leading-relaxed" id="score-recommendation">
+                            Recommendation loading...
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-purple-500/10 border border-purple-500/30 text-left text-xs space-y-2">
+                        <span class="font-bold text-purple-300 block"><i class="fa-solid fa-sliders mr-1"></i> System Optimization Patch:</span>
+                        <p id="score-patch-text" class="text-slate-300">
+                            Deploy the Viveka Firewall every morning and load the 71-Verse Sadhana Panchakam protocol.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 bg-slate-900 border-t border-slate-800 flex items-center justify-between shrink-0">
+                <button onclick="closeAuditModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition-colors">
+                    Close
+                </button>
+                <button id="audit-action-btn" onclick="calculateAuditScore()" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-bold text-xs transition-colors shadow-lg">
+                    Calculate Sovereignty Score &rarr;
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- RESOURCE PREVIEW MODAL -->
+    <div id="resource-preview-modal" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="relative w-full max-w-3xl glass-card rounded-2xl overflow-hidden border border-slate-700 shadow-2xl h-[80vh] flex flex-col">
+            <div class="p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-file-lines text-teal-400"></i>
+                    <span id="preview-modal-title" class="text-sm font-bold font-heading text-white">Resource Preview</span>
+                </div>
+                <button onclick="closeResourcePreview()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto flex-1 space-y-4 text-xs sm:text-sm text-slate-300" id="preview-modal-content">
+                <!-- Content loaded dynamically -->
+            </div>
+            <div class="p-4 bg-slate-900 border-t border-slate-800 flex items-center justify-between shrink-0">
+                <span class="text-slate-400 text-xs">Practitioner Companion Tool</span>
+                <button onclick="downloadPrintableTracker()" class="px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Open Printable Version
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SAMPLE CHAPTER READER MODAL -->
+    <div id="sample-modal" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="relative w-full max-w-3xl glass-card rounded-2xl overflow-hidden border border-slate-700 shadow-2xl h-[85vh] flex flex-col">
+            
+            <div class="p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-book-open text-purple-400"></i>
+                    <span class="text-sm font-bold font-heading text-white">E2FY-Life Excerpt Preview</span>
+                </div>
+                <button onclick="closeSampleChapter()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Chapter Reader Content -->
+            <div class="p-6 sm:p-8 overflow-y-auto space-y-6 text-slate-300 text-sm sm:text-base leading-relaxed flex-1" id="reader-body">
+                <div class="border-b border-slate-800 pb-4">
+                    <span class="text-xs font-bold text-purple-400 uppercase tracking-widest block">Chapter 01 Excerpt</span>
+                    <h2 class="text-2xl font-bold font-heading text-white mt-1">The Curiosity Note: Breaking the Code of You</h2>
+                </div>
+
+                <p>
+                    Imagine waking up one day to realize that you aren't actually typing commands into a computer—but that a giant, automated digital matrix has been quietly typing commands into you. Every time you check a notification, feel a surge of exam panic, or compare your real life to someone else's edited reel, a predatory algorithm wins.
+                </p>
+
+                <div class="p-4 rounded-xl bg-purple-500/10 border-l-4 border-purple-500 text-purple-200 text-xs sm:text-sm">
+                    <strong>The Master Principle:</strong> To survive and lead in an automated AI world, you do not need rote memorization or traditional trial-and-error thinking—you need raw mental stamina, spiritual depth, and digital resilience.
+                </div>
+
+                <h3 class="text-lg font-bold text-white font-heading pt-2">The Grand Master Question</h3>
+                <p>
+                    Why is aligning our daily actions with the Supreme Creator an unavoidable, scientifically and spiritually proven necessity for every human being?
+                </p>
+
+                <p>
+                    Everything in life is built out of experience, which needs to evolve and get enriched so that we can improve our overall experience in life. Nature’s law dictates that every creation in this universe is formed to sustain each other following nature’s rhythm.
+                </p>
+
+                <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 font-mono text-xs text-cyan-300">
+                    अन्नाद्भवन्ति भूतानि पर्जन्यादन्नसम्भवः |<br>
+                    यज्ञाद्भवति पर्जन्यो यज्ञः कर्मसमुद्भवः || १४ ||<br>
+                    <span class="text-slate-400 mt-2 block font-sans">"All living beings subsist on food, and food is produced by rains. Rains are born from the performance of Yajna (selfless sacrifice)..." — Gita 3.14</span>
+                </div>
+            </div>
+
+            <div class="p-4 bg-slate-900 border-t border-slate-800 flex items-center justify-between shrink-0 text-xs">
+                <span class="text-slate-400">Reading Excerpt: 1 of 3 Pages</span>
+                <button onclick="triggerBuyAction('Full Book')" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition-colors">
+                    Get Full Book &rarr;
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
+
+    <!-- Footer Section -->
+    <footer class="bg-slate-950 border-t border-slate-800/80 py-12 text-slate-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 to-cyan-500 p-[1px]">
+                        <div class="w-full h-full bg-slate-950 rounded-[7px] flex items-center justify-center">
+                            <i class="fa-solid fa-atom text-cyan-400 text-sm"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-base font-bold font-heading text-white">E2FY</span>
+                        <span class="block text-[10px] text-slate-500">Enrich Experience For Yog</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-6 text-slate-300">
+                    <button onclick="navigateTo('home')" class="hover:text-cyan-400">Home</button>
+                    <button onclick="navigateTo('home', 'principles')" class="hover:text-cyan-400">Principles</button>
+                    <button onclick="navigateTo('life')" class="hover:text-purple-400">E2FY-Life</button>
+                    <button onclick="navigateTo('edu')" class="hover:text-cyan-400">E2FY-Edu</button>
+                    <button onclick="navigateTo('health')" class="hover:text-amber-400">E2FY-Health</button>
+                </div>
+
+                <div class="flex items-center gap-4 text-slate-400 text-base">
+                    <a href="#" onclick="showToast('Social links coming soon!', 'info'); return false;" class="hover:text-cyan-400"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" onclick="showToast('YouTube channel coming soon!', 'info'); return false;" class="hover:text-rose-500"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" onclick="showToast('Discord community coming soon!', 'info'); return false;" class="hover:text-indigo-400"><i class="fa-brands fa-discord"></i></a>
+                </div>
+
+            </div>
+
+            <div class="pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                <p>&copy; 2026 E2FY (Enrich Experience For Yog). All rights reserved.</p>
+                <p class="text-slate-500">Synthesized from Bhagavad Gita, Upanishads &amp; Adi Shankara’s Frameworks.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CLIENT JAVASCRIPT LOGIC -->
+    <script>
+        // State variables
+        let currentTheme = 'dark';
+        let currentPrincipleIndex = 0;
+        let principleAutoTimer = null;
+        let videoPlaybackInterval = null;
+        let isVideoPlaying = false;
+        let videoCurrentTime = 0;
+        let videoDuration = 165; // seconds (2:45)
+
+        // Trailer Data Dictionary
+        const trailerData = {
+            'master-trailer': {
+                title: 'E2FY Master Overview: Upgrade Your Mind',
+                desc: 'A comprehensive introduction to E2FY, Sanatana Dharma frameworks, neuroscience, and thermodynamics.',
+                transcript: '"In an automated world governed by AI and constant digital noise, you must understand the core engine running beneath reality. E2FY transforms ordinary action into meditation."',
+                duration: 165
+            },
+            'life-1': {
+                title: 'E2FY-Life Ep 01: The Matrix in Your Pocket',
+                desc: 'How predatory algorithms extract your attention and how to deploy the Viveka Firewall.',
+                transcript: '"Every time you react to a notification or compare your real life to an edited video reel, a predatory algorithm wins. It has successfully hacked your attention span."',
+                duration: 165
+            },
+            'life-2': {
+                title: 'E2FY-Life Ep 02: The Grand Master Question',
+                desc: 'Deconstructing E2FY, Cosmic Interdependence (3.14), and action as meditation (4.24).',
+                transcript: '"Karma Yog is not just working hard—it is executing duties while detached from selfish panic, connecting your work directly to the cosmic grid."',
+                duration: 192
+            },
+            'life-3': {
+                title: 'E2FY-Life Ep 03: The Swarajya Kernel',
+                desc: 'Establishing unshakeable self-sovereignty immune to external praise, blame, or trends.',
+                transcript: '"The Sovereign Kernel locks your internal peace inside your own heart, completely immune to external praise, blame, or machine-learning manipulation."',
+                duration: 138
+            },
+            'edu-1': {
+                title: 'E2FY-Edu Ep 01: Beyond Rote Learning',
+                desc: 'Moving from memorization to genuine cognitive understanding and societal contribution.',
+                transcript: '"Knowledge is not a weapon to beat your peers on a leaderboard. It is the rain that allows you to cultivate real solutions for future world challenges."',
+                duration: 150
+            },
+            'edu-2': {
+                title: 'E2FY-Edu Ep 02: The Exam Panic Firewall',
+                desc: 'How to disarm pre-exam amygdala responses using Karma Yog detachment techniques.',
+                transcript: '"When you study with Yajna Bhavana, exam fear drops dramatically because your duty is simply to offer absolute effort—the marks are a secondary byproduct."',
+                duration: 185
+            },
+            'edu-3': {
+                title: 'E2FY-Edu Ep 03: Student Karma Yog',
+                desc: 'Practical daily study rituals converting textbook hours into active meditation.',
+                transcript: '"My intellect is the altar, my focus is the fire, and my effort is the offering. May this knowledge help me serve the world."',
+                duration: 170
+            }
+        };
+
+        // SPA View Navigator with validation
+        function navigateTo(pageId, sectionId = null) {
+            const views = ['home', 'life', 'edu', 'health'];
+            
+            views.forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                if (el) {
+                    if (v === pageId) {
+                        el.classList.remove('page-hidden');
+                        el.classList.add('page-visible');
+                    } else {
+                        el.classList.remove('page-visible');
+                        el.classList.add('page-hidden');
+                    }
+                }
+            });
+
+            // Update Nav styling across buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-cyan-400');
+                btn.classList.add('text-slate-300');
+            });
+            const activeNav = document.getElementById(`nav-${pageId}`);
+            if (activeNav) {
+                activeNav.classList.remove('text-slate-300');
+                activeNav.classList.add('text-cyan-400');
+            }
+
+            // Scroll Handling
+            if (sectionId) {
+                setTimeout(() => {
+                    const sec = document.getElementById(sectionId);
+                    if (sec) sec.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Theme Toggle Function for Desktop & Mobile
+        function toggleTheme() {
+            const html = document.documentElement;
+            const desktopIcon = document.getElementById('theme-icon-desktop');
+            const mobileIcon = document.getElementById('theme-icon-mobile');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                if (desktopIcon) { desktopIcon.classList.remove('fa-moon'); desktopIcon.classList.add('fa-sun'); }
+                if (mobileIcon) { mobileIcon.classList.remove('fa-moon'); mobileIcon.classList.add('fa-sun'); }
+                currentTheme = 'light';
+                showToast('Light theme activated with high-contrast AAA typography', 'info');
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                if (desktopIcon) { desktopIcon.classList.remove('fa-sun'); desktopIcon.classList.add('fa-moon'); }
+                if (mobileIcon) { mobileIcon.classList.remove('fa-sun'); mobileIcon.classList.add('fa-moon'); }
+                currentTheme = 'dark';
+                showToast('Dark theme activated', 'info');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        // Live Diagnostic Audit Modal Handlers
+        function openAuditModal() {
+            const q = document.getElementById('audit-questions');
+            const r = document.getElementById('audit-results');
+            const btn = document.getElementById('audit-action-btn');
+            
+            if (q) q.classList.remove('hidden');
+            if (r) r.classList.add('hidden');
+            if (btn) {
+                btn.innerText = 'Calculate Sovereignty Score \u2192';
+                btn.setAttribute('onclick', 'calculateAuditScore()');
+            }
+            const modal = document.getElementById('audit-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeAuditModal() {
+            const modal = document.getElementById('audit-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function calculateAuditScore() {
+            let score = 0;
+            for (let i = 1; i <= 5; i++) {
+                const checked = document.querySelector(`input[name="q${i}"]:checked`);
+                if (checked) {
+                    score += parseInt(checked.value, 10);
+                }
+            }
+
+            const q = document.getElementById('audit-questions');
+            const r = document.getElementById('audit-results');
+            if (q) q.classList.add('hidden');
+            if (r) r.classList.remove('hidden');
+            
+            const scoreDisplay = document.getElementById('score-display');
+            if (scoreDisplay) scoreDisplay.innerText = `${score} / 10`;
+
+            const statusEl = document.getElementById('score-status');
+            const recEl = document.getElementById('score-recommendation');
+            const patchEl = document.getElementById('score-patch-text');
+
+            if (score >= 8) {
+                if (statusEl) { statusEl.innerText = "Sovereign Master (Unhackable OS)"; statusEl.className = "text-sm font-bold text-emerald-400"; }
+                if (recEl) recEl.innerText = "Your Viveka Firewall is functioning optimally. Continue maintaining your daily Sadhana Panchakam schedule and deepening your Yajna Bhavana practice.";
+                if (patchEl) patchEl.innerText = "Patch: Deepen Brahma-Karma awareness in daily tasks and mentor younger peers.";
+            } else if (score >= 4) {
+                if (statusEl) { statusEl.innerText = "System Friction Detected (Moderate Hijack)"; statusEl.className = "text-sm font-bold text-amber-400"; }
+                if (recEl) recEl.innerText = "You are experiencing moderate cognitive friction caused by outcome anxiety or digital distraction. Deploy Karma Yog execution protocols.";
+                if (patchEl) patchEl.innerText = "Patch: Implement Q1 morning Viveka pause (no phone first 30 mins) and detach from exam/review ranks.";
+            } else {
+                if (statusEl) { statusEl.innerText = "Critical Algorithmic Hijack (High Entropy)"; statusEl.className = "text-sm font-bold text-rose-400"; }
+                if (recEl) recEl.innerText = "Your attention span and nervous system are currently being commanded by external matrix algorithms. Immediate Master Code reset required.";
+                if (patchEl) patchEl.innerText = "Patch: Initialize 7-day screen audit, load Sadhana Panchakam 6-block daily routine, and practice outcome detachment.";
+            }
+
+            const btn = document.getElementById('audit-action-btn');
+            if (btn) {
+                btn.innerText = 'Re-Take Diagnostic Audit';
+                btn.setAttribute('onclick', 'openAuditModal()');
+            }
+        }
+
+        // Printable Tracker PDF Generator Window
+        function downloadPrintableTracker() {
+            const printWin = window.open('', '_blank');
+            if (!printWin) {
+                showToast('Please allow popups to generate PDF tracker', 'info');
+                return;
+            }
+            printWin.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>E2FY & Sadhana Panchakam Weekly Tracker</title>
+                    <style>
+                        body { font-family: sans-serif; padding: 20px; color: #0f172a; line-height: 1.4; }
+                        h1 { color: #0f172a; font-size: 20px; margin-bottom: 4px; }
+                        .subtitle { color: #64748b; font-size: 12px; margin-bottom: 20px; text-transform: uppercase; }
+                        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 11px; }
+                        th, td { border: 1px solid #cbd5e1; padding: 8px; text-align: left; }
+                        th { background: #f1f5f9; text-transform: uppercase; font-size: 10px; }
+                        .check-box { width: 14px; height: 14px; border: 1px solid #94a3b8; display: inline-block; }
+                    </style>
+                </head>
+                <body>
+                    <h1>E2FY & SADHANA PANCHAKAM</h1>
+                    <div class="subtitle">Sovereign Weekly Execution Tracker & Daily Diagnostics</div>
+                    
+                    <h3>1. Daily Timetable & Routine Matrix</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time Block</th>
+                                <th>Sadhana Panchakam Protocol</th>
+                                <th>E2FY Mindset</th>
+                                <th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>06:00 - 07:30</td>
+                                <td>Vedo Nityam Adhiyatam</td>
+                                <td>Viveka Firewall: Screen-free morning pause.</td>
+                                <td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td>
+                            </tr>
+                            <tr>
+                                <td>08:30 - 13:00</td>
+                                <td>Tad-artham Karma Sevyatam</td>
+                                <td>Brahma-Karma: Work/study desk as altar.</td>
+                                <td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td>
+                            </tr>
+                            <tr>
+                                <td>14:00 - 18:00</td>
+                                <td>Duhkham Na Rodyatam</td>
+                                <td>Karma Yog: 100% focus, 0% panic.</td>
+                                <td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td>
+                            </tr>
+                            <tr>
+                                <td>21:30 - 22:00</td>
+                                <td>Parabrahmani Ramyatam</td>
+                                <td>Swarajya Kernel: Sovereign night reset.</td>
+                                <td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>2. Daily Diagnostic Checklist</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Diagnostic System Check</th>
+                                <th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1. Protected first 30 mins awake from screens?</td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td></tr>
+                            <tr><td>2. Separated self-worth from exam ranks & status?</td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td></tr>
+                            <tr><td>3. Surrendered unmanageable outcomes cleanly?</td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td><td><span class="check-box"></span></td></tr>
+                        </tbody>
+                    </table>
+                    <script>window.onload = function() { window.print(); }<\/script>
+                </body>
+                </html>
+            `);
+            printWin.document.close();
+            showToast('Opening printable tracker window...', 'info');
+        }
+
+        // Preview Resource Modal Handler
+        function previewResource(type) {
+            const modal = document.getElementById('resource-preview-modal');
+            const titleEl = document.getElementById('preview-modal-title');
+            const contentEl = document.getElementById('preview-modal-content');
+
+            if (!modal || !titleEl || !contentEl) return;
+
+            if (type === 'checklist') {
+                titleEl.innerText = "Practitioner's Daily Diagnostic Checklist Preview";
+                contentEl.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="p-3 bg-purple-500/10 border border-purple-500/30 rounded-lg">
+                            <h4 class="font-bold text-purple-300 mb-1">Layer 1: Viveka Firewall Audit</h4>
+                            <p class="text-xs text-slate-300">Scans morning routine, digital input protection, and identity separation from temporary metrics.</p>
+                        </div>
+                        <div class="p-3 bg-cyan-500/10 border border-cyan-500/30 rounded-lg">
+                            <h4 class="font-bold text-cyan-300 mb-1">Layer 2: E2FY Execution Engine Audit</h4>
+                            <p class="text-xs text-slate-300">Audits effort as Yajna (Gita 3.14 & 4.24), work desk as altar, and outcome detachment.</p>
+                        </div>
+                        <div class="p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+                            <h4 class="font-bold text-amber-300 mb-1">Layer 3: Swarajya Kernel Audit</h4>
+                            <p class="text-xs text-slate-300">Audits relational harmony, disarming office/school politics, and nightly sovereign resets.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'tracker') {
+                titleEl.innerText = "Weekly Swarajya Tracker Sheet Preview";
+                contentEl.innerHTML = `
+                    <div class="space-y-3">
+                        <p class="text-xs text-slate-300">The Weekly Swarajya Tracker Sheet is formatted for 2-page print layout containing:</p>
+                        <ul class="list-disc pl-5 text-xs text-slate-300 space-y-1">
+                            <li>6-block daily timetable mapped to Sadhana Panchakam Sanskrit verses.</li>
+                            <li>9 daily diagnostic check boxes across Monday through Sunday.</li>
+                            <li>Weekly Swarajya Score logging box (/10) and mind glitch patch log.</li>
+                        </ul>
+                    </div>
+                `;
+            } else if (type === 'cheatsheet') {
+                titleEl.innerText = "71-Verse System Optimization Cheat-Sheet Preview";
+                contentEl.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg">
+                            <span class="text-[10px] font-bold text-purple-400 uppercase">Core 1: Bhaja Govindam (31 Verses)</span>
+                            <p class="text-xs text-slate-300 mt-1">System Diagnostic: Purges exam anxiety, status hoarding loop, and digital dopamine addiction.</p>
+                        </div>
+                        <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg">
+                            <span class="text-[10px] font-bold text-cyan-400 uppercase">Core 2: Sadhana Panchakam (40 Verses)</span>
+                            <p class="text-xs text-slate-300 mt-1">System Updates: Deploys 40 step-by-step protocols for study discipline, emotional equilibrium, and self-sovereignty.</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                titleEl.innerText = "Master Code Architecture Infographic";
+                contentEl.innerHTML = `
+                    <div class="p-6 bg-slate-900 border border-slate-800 rounded-xl text-center space-y-3">
+                        <i class="fa-solid fa-diagram-project text-4xl text-teal-400"></i>
+                        <h4 class="font-bold text-white">Master Code System Flowchart</h4>
+                        <p class="text-xs text-slate-300">Visual diagram mapping Interdependence (Gita 3.14) &rarr; Brahma-Karma (Gita 4.24) &rarr; Dual-Core Shankara Processor &rarr; Swarajya Sovereignty.</p>
+                    </div>
+                `;
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeResourcePreview() {
+            const modal = document.getElementById('resource-preview-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        // Principles Carousel Logic
+        function updatePrinciplesCarousel() {
+            const track = document.getElementById('principles-track');
+            const dotsContainer = document.getElementById('principles-dots');
+
+            if (track) {
+                const offset = currentPrincipleIndex * -100;
+                track.style.transform = `translateX(${offset}%)`;
+            }
+
+            if (dotsContainer && dotsContainer.children) {
+                const dots = dotsContainer.children;
+                for (let i = 0; i < dots.length; i++) {
+                    if (i === currentPrincipleIndex) {
+                        dots[i].className = "w-8 h-2 rounded-full bg-purple-500 transition-all cursor-pointer";
+                    } else {
+                        dots[i].className = "w-2 h-2 rounded-full bg-slate-700 hover:bg-slate-500 transition-all cursor-pointer";
+                    }
+                }
+            }
+        }
+
+        function nextPrinciple() {
+            currentPrincipleIndex = (currentPrincipleIndex + 1) % 5;
+            updatePrinciplesCarousel();
+        }
+
+        function prevPrinciple() {
+            currentPrincipleIndex = (currentPrincipleIndex - 1 + 5) % 5;
+            updatePrinciplesCarousel();
+        }
+
+        function goToPrinciple(index) {
+            currentPrincipleIndex = index;
+            updatePrinciplesCarousel();
+        }
+
+        function startPrinciplesAutoPlay() {
+            stopPrinciplesAutoPlay();
+            principleAutoTimer = setInterval(nextPrinciple, 7000);
+        }
+
+        function stopPrinciplesAutoPlay() {
+            if (principleAutoTimer) clearInterval(principleAutoTimer);
+        }
+
+        // Video Modal Controls
+        function openVideoModal(videoId) {
+            const data = trailerData[videoId] || trailerData['master-trailer'];
+            
+            const titleEl = document.getElementById('video-modal-title');
+            const titleSubEl = document.getElementById('video-modal-title-sub');
+            const descEl = document.getElementById('video-modal-desc');
+            const transcriptEl = document.getElementById('video-modal-transcript');
+
+            if (titleEl) titleEl.innerText = data.title;
+            if (titleSubEl) titleSubEl.innerText = data.title;
+            if (descEl) descEl.innerText = data.desc;
+            if (transcriptEl) transcriptEl.innerText = data.transcript;
+            
+            videoDuration = data.duration;
+            videoCurrentTime = 0;
+            isVideoPlaying = false;
+            updateVideoUI();
+
+            const modal = document.getElementById('video-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('video-modal');
+            if (modal) modal.classList.add('hidden');
+            pauseSimulatedVideo();
+        }
+
+        function toggleSimulatedPlay() {
+            if (isVideoPlaying) {
+                pauseSimulatedVideo();
+            } else {
+                playSimulatedVideo();
+            }
+        }
+
+        function playSimulatedVideo() {
+            isVideoPlaying = true;
+            const playIcon1 = document.getElementById('simulated-play-icon');
+            const playIcon2 = document.getElementById('controls-play-icon');
+
+            if (playIcon1) playIcon1.className = 'fa-solid fa-pause ml-0';
+            if (playIcon2) playIcon2.className = 'fa-solid fa-pause text-cyan-400';
+            
+            videoPlaybackInterval = setInterval(() => {
+                videoCurrentTime += 1;
+                if (videoCurrentTime >= videoDuration) {
+                    videoCurrentTime = videoDuration;
+                    pauseSimulatedVideo();
+                }
+                updateVideoUI();
+            }, 1000);
+        }
+
+        function pauseSimulatedVideo() {
+            isVideoPlaying = false;
+            const playIcon1 = document.getElementById('simulated-play-icon');
+            const playIcon2 = document.getElementById('controls-play-icon');
+
+            if (playIcon1) playIcon1.className = 'fa-solid fa-play ml-1';
+            if (playIcon2) playIcon2.className = 'fa-solid fa-play text-cyan-400';
+            if (videoPlaybackInterval) clearInterval(videoPlaybackInterval);
+        }
+
+        function updateVideoUI() {
+            const progressPercent = (videoCurrentTime / videoDuration) * 100;
+            const progressEl = document.getElementById('video-progress');
+            if (progressEl) progressEl.style.width = `${progressPercent}%`;
+
+            const formatTime = (seconds) => {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            };
+
+            const timeEl = document.getElementById('video-time');
+            if (timeEl) timeEl.innerText = `${formatTime(videoCurrentTime)} / ${formatTime(videoDuration)}`;
+        }
+
+        function seekSimulatedVideo(e) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const width = rect.width;
+            const percentage = clickX / width;
+            videoCurrentTime = Math.floor(percentage * videoDuration);
+            updateVideoUI();
+        }
+
+        // Sample Reader Controls
+        function openSampleChapter() {
+            const modal = document.getElementById('sample-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeSampleChapter() {
+            const modal = document.getElementById('sample-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function triggerBuyAction(platform) {
+            showToast(`Redirecting to ${platform} store...`, 'success');
+        }
+
+        function handleNotifySubmit(e) {
+            e.preventDefault();
+            const emailEl = document.getElementById('notify-email');
+            if (emailEl) {
+                showToast(`Registered ${emailEl.value} for launch updates!`, 'success');
+                emailEl.value = '';
+            }
+        }
+
+        // Testimonials Category Filter
+        function filterTestimonials(category) {
+            const cards = document.querySelectorAll('.testimonial-card');
+            const btns = document.querySelectorAll('.testimonial-filter-btn');
+
+            btns.forEach(btn => {
+                btn.classList.remove('bg-purple-600', 'text-white');
+                btn.classList.add('bg-slate-800', 'text-slate-300');
+            });
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.remove('bg-slate-800', 'text-slate-300');
+                event.currentTarget.classList.add('bg-purple-600', 'text-white');
+            }
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Toast Notification System
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            
+            const bgClass = type === 'success' ? 'bg-emerald-600' : 'bg-purple-600';
+            const icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-info';
+
+            toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 text-xs font-semibold transform transition-all duration-300 translate-y-4 opacity-0 pointer-events-auto`;
+            toast.innerHTML = `<i class="fa-solid ${icon}"></i> <span>${message}</span>`;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-4');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Global Esc Key Listener to Close Open Modals
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+                closeAuditModal();
+                closeResourcePreview();
+                closeSampleChapter();
+            }
+        });
+
+        // Window Load Initialization
+        window.onload = function() {
+            startPrinciplesAutoPlay();
+            
+            const carouselContainer = document.getElementById('principles');
+            if (carouselContainer) {
+                carouselContainer.addEventListener('mouseenter', stopPrinciplesAutoPlay);
+                carouselContainer.addEventListener('mouseleave', startPrinciplesAutoPlay);
+            }
+        };
+    </script>
+</body>
+</html>
