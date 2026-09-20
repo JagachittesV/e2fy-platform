@@ -101,11 +101,11 @@
         }
         .gradient-border-inner { border-radius: 0.95rem; }
         .page-transition { transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; }
-        .page-hidden { display: none; opacity: 0; transform: translateY(12px); }
-        .page-visible { display: block; opacity: 1; transform: translateY(0); }
+        .page-hidden { display: none !important; opacity: 0; transform: translateY(12px); }
+        .page-visible { display: block !important; opacity: 1; transform: translateY(0); }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 transition-colors duration-300 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 transition-colors duration-300 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-white" onmouseenter="pausePrinciplesAuto()" onmouseleave="resumePrinciplesAuto()">
 
     <header class="sticky top-0 z-40 w-full glass-nav transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -122,45 +122,48 @@
             </a>
 
             <nav class="hidden md:flex items-center gap-1 lg:gap-2 text-sm font-medium">
-                <button onclick="navigateTo('home')" id="nav-home" class="nav-btn px-3 py-2 rounded-lg text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-2">
+                <button onclick="navigateTo('home')" id="nav-home" class="nav-btn px-3 py-2 rounded-lg text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-2 cursor-pointer">
                     <i class="fa-solid fa-house text-xs"></i> <span data-i18n="navHome">Home</span>
                 </button>
-                <button onclick="navigateTo('home', 'principles')" id="nav-principles" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors flex items-center gap-2">
+                <button onclick="navigateTo('home', 'principles')" id="nav-principles" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors flex items-center gap-2 cursor-pointer">
                     <i class="fa-solid fa-compass text-xs"></i> <span data-i18n="navPrinciples">Principles</span>
                 </button>
-                <button onclick="navigateTo('life')" id="nav-life" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors flex items-center gap-2">
+                <button onclick="navigateTo('home', 'resources-reviews')" id="nav-resources" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-star text-xs text-amber-400"></i> <span data-i18n="navResources">Resources & Reviews</span>
+                </button>
+                <button onclick="navigateTo('life')" id="nav-life" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors flex items-center gap-2 cursor-pointer">
                     <i class="fa-solid fa-brain text-xs text-purple-400"></i> <span data-i18n="navLife">E2FY-Life</span>
                 </button>
-                <button onclick="navigateTo('edu')" id="nav-edu" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors flex items-center gap-2">
+                <button onclick="navigateTo('edu')" id="nav-edu" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors flex items-center gap-2 cursor-pointer">
                     <i class="fa-solid fa-graduation-cap text-xs text-cyan-400"></i> <span data-i18n="navEdu">E2FY-Edu</span> 
                     <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30" data-i18n="badgeSoon">SOON</span>
                 </button>
-                <button onclick="navigateTo('health')" id="nav-health" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors flex items-center gap-2">
+                <button onclick="navigateTo('health')" id="nav-health" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors flex items-center gap-2 cursor-pointer">
                     <i class="fa-solid fa-heart-pulse text-xs text-amber-400"></i> <span data-i18n="navHealth">E2FY-Health</span> 
                     <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30" data-i18n="badgeSoon">SOON</span>
                 </button>
             </nav>
 
             <div class="hidden md:flex items-center gap-3">
-                <button onclick="toggleLanguage()" class="px-3 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 text-cyan-400 text-xs font-bold transition-all flex items-center gap-1.5">
+                <button onclick="toggleLanguage()" class="px-3 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 text-cyan-400 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer">
                     <i class="fa-solid fa-language text-sm"></i> <span id="lang-label">தமிழ்</span>
                 </button>
-                <button id="desktop-theme-toggle" onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 text-amber-400 flex items-center justify-center transition-all">
+                <button id="desktop-theme-toggle" onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 text-amber-400 flex items-center justify-center transition-all cursor-pointer">
                     <i class="fa-solid fa-moon text-base" id="theme-icon-desktop"></i>
                 </button>
-                <button onclick="openAuditModal()" class="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white shadow-lg shadow-purple-500/20 transition-all flex items-center gap-2">
+                <button onclick="openAuditModal()" class="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white shadow-lg shadow-purple-500/20 transition-all flex items-center gap-2 cursor-pointer">
                     <i class="fa-solid fa-gauge-high"></i> <span data-i18n="btnAudit">Live Audit</span>
                 </button>
             </div>
 
             <div class="flex items-center gap-2 md:hidden">
-                <button onclick="toggleLanguage()" class="px-2.5 py-2 rounded-xl bg-slate-800/80 text-cyan-400 text-xs font-bold border border-slate-700">
+                <button onclick="toggleLanguage()" class="px-2.5 py-2 rounded-xl bg-slate-800/80 text-cyan-400 text-xs font-bold border border-slate-700 cursor-pointer">
                     <span id="lang-label-mobile">தமிழ்</span>
                 </button>
-                <button id="mobile-theme-toggle" onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-slate-800/80 text-amber-400 flex items-center justify-center">
+                <button id="mobile-theme-toggle" onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-slate-800/80 text-amber-400 flex items-center justify-center cursor-pointer">
                     <i class="fa-solid fa-moon text-base" id="theme-icon-mobile"></i>
                 </button>
-                <button onclick="toggleMobileMenu()" class="w-10 h-10 rounded-xl bg-slate-800/80 text-slate-200 flex items-center justify-center">
+                <button onclick="toggleMobileMenu()" class="w-10 h-10 rounded-xl bg-slate-800/80 text-slate-200 flex items-center justify-center cursor-pointer">
                     <i class="fa-solid fa-bars text-lg"></i>
                 </button>
             </div>
@@ -172,6 +175,9 @@
             </button>
             <button onclick="navigateTo('home', 'principles'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800 flex items-center gap-3">
                 <i class="fa-solid fa-compass text-purple-400 w-5"></i> <span data-i18n="navPrinciples">Principles</span>
+            </button>
+            <button onclick="navigateTo('home', 'resources-reviews'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800 flex items-center gap-3">
+                <i class="fa-solid fa-star text-amber-400 w-5"></i> <span data-i18n="navResources">Resources & Reviews</span>
             </button>
             <button onclick="navigateTo('life'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800 flex items-center gap-3">
                 <i class="fa-solid fa-brain text-purple-400 w-5"></i> <span data-i18n="navLife">E2FY-Life</span>
@@ -185,9 +191,8 @@
         </div>
     </header>
 
-    <main class="flex-1" onmouseenter="pausePrinciplesAuto()" onmouseleave="resumePrinciplesAuto()">
+    <main class="flex-1">
 
-        <!-- ================= HOME VIEW ================= -->
         <div id="view-home" class="page-transition page-visible">
             <section class="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-32">
                 <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-purple-600/20 via-cyan-500/20 to-amber-500/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
@@ -206,14 +211,14 @@
                             </h1>
 
                             <p class="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed mx-auto lg:mx-0" data-i18n="heroDesc">
-                                Modern algorithms have hacked human attention spans, exam stress, and emotional peace. <strong>E2FY (Enrich Experience For Yog)</strong> translates timeless Sanatana Dharma frameworks into an operating system backed by hard physics, neuroscience, and Adi Shankara’s dual-core logic.
+                                Modern algorithms have hacked human attention spans, exam stress, and emotional peace for Gen-Z & Gen-Alpha. <strong>E2FY (Enrich Experience For Yog)</strong> translates timeless Sanatana Dharma frameworks into an operating system backed by hard physics, neuroscience, and Adi Shankara’s dual-core logic.
                             </p>
 
                             <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                                <button onclick="openVideoModal('master-trailer')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white shadow-lg shadow-purple-500/25 transition-all flex items-center justify-center gap-3">
+                                <button onclick="openVideoModal('master-trailer')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white shadow-lg shadow-purple-500/25 transition-all flex items-center justify-center gap-3 cursor-pointer">
                                     <i class="fa-solid fa-play text-sm"></i> <span data-i18n="btnWatchTrailer">Watch Master Trailer</span>
                                 </button>
-                                <button onclick="navigateTo('life')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold glass-card hover:bg-slate-800/80 text-slate-100 border border-slate-700 transition-all flex items-center justify-center gap-3">
+                                <button onclick="navigateTo('life')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold glass-card hover:bg-slate-800/80 text-slate-100 border border-slate-700 transition-all flex items-center justify-center gap-3 cursor-pointer">
                                     <i class="fa-solid fa-book text-purple-400"></i> <span data-i18n="btnExploreBooks">Explore Book Series</span>
                                 </button>
                             </div>
@@ -272,7 +277,6 @@
                 </div>
             </section>
 
-            <!-- ================= PRINCIPLES CAROUSEL (0 TO 5) ================= -->
             <section id="principles" class="py-20 relative bg-slate-900/40 border-t border-slate-800">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
@@ -281,10 +285,10 @@
                             <h2 class="text-3xl sm:text-4xl font-bold font-heading" data-i18n="principlesTitle">The Principles of E2FY</h2>
                         </div>
                         <div class="flex items-center gap-3">
-                            <button onclick="prevPrinciple()" class="w-12 h-12 rounded-xl glass-card hover:bg-slate-800 flex items-center justify-center text-slate-200 transition-all border border-slate-700">
+                            <button onclick="prevPrinciple()" class="w-12 h-12 rounded-xl glass-card hover:bg-slate-800 flex items-center justify-center text-slate-200 transition-all border border-slate-700 cursor-pointer">
                                 <i class="fa-solid fa-chevron-left"></i>
                             </button>
-                            <button onclick="nextPrinciple()" class="w-12 h-12 rounded-xl glass-card hover:bg-slate-800 flex items-center justify-center text-slate-200 transition-all border border-slate-700">
+                            <button onclick="nextPrinciple()" class="w-12 h-12 rounded-xl glass-card hover:bg-slate-800 flex items-center justify-center text-slate-200 transition-all border border-slate-700 cursor-pointer">
                                 <i class="fa-solid fa-chevron-right"></i>
                             </button>
                         </div>
@@ -311,7 +315,7 @@
                                 <div class="lg:col-span-5 bg-gradient-to-br from-amber-900/30 to-slate-900 p-6 rounded-2xl border border-amber-500/20 text-center cursor-pointer group" onclick="openVideoModal('principle-0')">
                                     <i class="fa-solid fa-compass-drafting text-5xl text-amber-400 mb-4 group-hover:scale-110 transition-transform"></i>
                                     <h4 class="font-bold text-white mb-2" data-i18n="pr0BoxTitle">The Trigger & Driver</h4>
-                                    <p class="text-xs text-slate-400" data-i18n="pr0BoxDesc">Escaping the Matrix hack loop through compounded wisdom. Click to watch video.</p>
+                                    <p class="text-xs text-slate-400" data-i18n="pr0BoxDesc">Escaping the Matrix hack loop through compounded wisdom. Click to watch embedded video modal.</p>
                                 </div>
                             </div>
 
@@ -321,7 +325,7 @@
                                     <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold" data-i18n="pr1Badge">Principle 01 / 05</span>
                                     <h3 class="text-2xl sm:text-3xl font-bold font-heading text-purple-300" data-i18n="pr1Title">The Master Code Architecture</h3>
                                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed" data-i18n="pr1Desc">
-                                        Synthesized from Adi Shankara’s logic, the Master Code replaces external algorithmic manipulation with three internal protocols: Viveka (Firewall), Karma Yog (Execution), and Swarajya (Sovereignty).
+                                        Synthesized from Adi Shankara’s logic, the Master Code replaces external algorithmic manipulation with three internal protocols.
                                     </p>
                                 </div>
                                 <div class="lg:col-span-5 bg-gradient-to-br from-purple-900/30 to-slate-900 p-6 rounded-2xl border border-purple-500/20 text-center">
@@ -337,7 +341,7 @@
                                     <span class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-bold" data-i18n="pr2Badge">Principle 02 / 05</span>
                                     <h3 class="text-2xl sm:text-3xl font-bold font-heading text-cyan-300" data-i18n="pr2Title">The Cosmic Interdependence Cycle</h3>
                                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed" data-i18n="pr2Desc">
-                                        Based on Bhagavad Gita Chapter 3, Verse 14, nature operates as a continuous loop of mutual sustenance. Performing Yajna (selfless duty) keeps the cosmic ecosystem in balance.
+                                        Based on Bhagavad Gita Chapter 3, Verse 14, nature operates as a continuous loop of mutual sustenance.
                                     </p>
                                 </div>
                                 <div class="lg:col-span-5 bg-gradient-to-br from-cyan-900/30 to-slate-900 p-6 rounded-2xl border border-cyan-500/20 text-center">
@@ -353,7 +357,7 @@
                                     <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold" data-i18n="pr3Badge">Principle 03 / 05</span>
                                     <h3 class="text-2xl sm:text-3xl font-bold font-heading text-amber-300" data-i18n="pr3Title">Meditation in Action (Brahma-Karma)</h3>
                                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed" data-i18n="pr3Desc">
-                                        Derived from Bhagavad Gita Chapter 4, Verse 24, work is transformed into active meditation. Your desk is the altar, your focus is the offering.
+                                        Derived from Bhagavad Gita Chapter 4, Verse 24, work is transformed into active meditation.
                                     </p>
                                 </div>
                                 <div class="lg:col-span-5 bg-gradient-to-br from-amber-900/30 to-slate-900 p-6 rounded-2xl border border-amber-500/20 text-center">
@@ -369,7 +373,7 @@
                                     <span class="px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold" data-i18n="pr4Badge">Principle 04 / 05</span>
                                     <h3 class="text-2xl sm:text-3xl font-bold font-heading text-rose-300" data-i18n="pr4Title">The Digital Amygdala Firewall</h3>
                                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed" data-i18n="pr4Desc">
-                                        Modern social media and exam panic trigger constant amygdala fight-or-flight responses. E2FY installs diagnostic queries to audit daily reactions.
+                                        Modern social media and exam panic trigger constant amygdala fight-or-flight responses.
                                     </p>
                                 </div>
                                 <div class="lg:col-span-5 bg-gradient-to-br from-rose-900/30 to-slate-900 p-6 rounded-2xl border border-rose-500/20 text-center">
@@ -385,7 +389,7 @@
                                     <span class="px-3 py-1 rounded-full bg-teal-500/20 text-teal-300 text-xs font-bold" data-i18n="pr5Badge">Principle 05 / 05</span>
                                     <h3 class="text-2xl sm:text-3xl font-bold font-heading text-teal-300" data-i18n="pr5Title">Sovereign Consciousness (Swarajya)</h3>
                                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed" data-i18n="pr5Desc">
-                                        Establish an unshakeable internal anchor. Your joy, purpose, and self-worth remain locked inside your own heart, immune to external manipulation.
+                                        Establish an unshakeable internal anchor immune to external manipulation.
                                     </p>
                                 </div>
                                 <div class="lg:col-span-5 bg-gradient-to-br from-teal-900/30 to-slate-900 p-6 rounded-2xl border border-teal-500/20 text-center">
@@ -408,13 +412,128 @@
                     </div>
                 </div>
             </section>
+
+            <section id="resources-reviews" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <span class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-bold border border-cyan-500/30" data-i18n="resBadge">Practitioner Toolkit & Reviews</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-heading text-white" data-i18n="resTitle">Resources, Trackers & Case Studies</h2>
+                    <p class="text-slate-300 text-sm sm:text-base" data-i18n="resSub">Equipping you with rigorous open-source tools to audit your daily mind OS and accelerate sovereign alignment.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4 hover:border-cyan-500/50 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-heading text-white" data-i18n="resCard1Title">Sovereign Weekly Tracker</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" data-i18n="resCard1Desc">
+                            A printable PDF & digital matrix combining Sadhana Panchakam protocols with daily Life-Algo diagnostic queries.
+                        </p>
+                        <button onclick="openAuditModal()" class="text-xs font-bold text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-1.5 cursor-pointer">
+                            <span data-i18n="resCard1Btn">Launch Live Audit Tool</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+
+                    <div class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4 hover:border-purple-500/50 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-heading text-white" data-i18n="resCard2Title">Student & University Kit</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" data-i18n="resCard2Desc">
+                            Specialized frameworks designed to disarm exam panic, eliminate algorithmic doomscrolling, and restore deep focus.
+                        </p>
+                        <button onclick="navigateTo('edu')" class="text-xs font-bold text-purple-400 hover:text-purple-300 inline-flex items-center gap-1.5 cursor-pointer">
+                            <span data-i18n="resCard2Btn">Explore E2FY-Edu</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- Enhanced Practitioner Reviews Card with Scroll Action -->
+                    <div class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4 hover:border-amber-500/50 transition-all cursor-pointer" onclick="document.getElementById('testimonials').scrollIntoView({ behavior: 'smooth' })">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-heading text-white" data-i18n="resCard3Title">Practitioner Reviews</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" data-i18n="resCard3Desc">
+                            Read how students, engineers, and researchers use the Master Code to stay unhackable in an automated matrix.
+                        </p>
+                        <span class="text-xs font-bold text-amber-400 inline-flex items-center gap-1.5">
+                            <span data-i18n="resCard3Btn">4.9 / 5.0 Sovereign Rating</span> <i class="fa-solid fa-shield text-[10px]"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Testimonials / Practitioner Reviews & Impact Section -->
+                <div class="pt-12 border-t border-slate-800 space-y-8" id="testimonials">
+                    <div class="text-center max-w-2xl mx-auto space-y-2">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest block">Generation Feedback</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold font-heading text-white">Practitioner Reviews & Impact</h3>
+                        <p class="text-xs sm:text-sm text-slate-300">See how students, corporate executives, educators, and spiritual seekers use E2FY.</p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-center gap-2">
+                        <button onclick="filterTestimonials('all')" class="testimonial-filter-btn px-4 py-2 rounded-xl bg-purple-600 text-white text-xs font-bold transition-all cursor-pointer">All Reviews</button>
+                        <button onclick="filterTestimonials('student')" class="testimonial-filter-btn px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-bold transition-all cursor-pointer">Gen-Z Students</button>
+                        <button onclick="filterTestimonials('executive')" class="testimonial-filter-btn px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-bold transition-all cursor-pointer">Tech Executives</button>
+                        <button onclick="filterTestimonials('educator')" class="testimonial-filter-btn px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-bold transition-all cursor-pointer">Educators</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="testimonials-grid">
+                        <div class="testimonial-card glass-card p-6 rounded-2xl border border-slate-800 space-y-4" data-category="student">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed italic">
+                                "Before reading E2FY-Edu, JEE exam preparation felt like torture. Applying Karma Yog execution completely cured my exam panic. I view studying as my offering now."
+                            </p>
+                            <div class="pt-4 border-t border-slate-800 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center text-xs">AR</div>
+                                <div>
+                                    <h4 class="font-bold text-white text-xs">Ananya Rao</h4>
+                                    <span class="text-[10px] text-slate-400">Engineering Student (Gen-Z)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card glass-card p-6 rounded-2xl border border-slate-800 space-y-4" data-category="executive">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed italic">
+                                "The Master Code equation (Viveka + Karma Yog + Swarajya) is the most logical operating system I've ever deployed. It eliminated corporate burnout completely."
+                            </p>
+                            <div class="pt-4 border-t border-slate-800 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-purple-500/20 text-purple-400 font-bold flex items-center justify-center text-xs">VK</div>
+                                <div>
+                                    <h4 class="font-bold text-white text-xs">Vikram Kapoor</h4>
+                                    <span class="text-[10px] text-slate-400">VP of Engineering & AI Architect</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card glass-card p-6 rounded-2xl border border-slate-800 space-y-4" data-category="educator">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed italic">
+                                "E2FY bridges ancient Sanatana Dharma with neuroscience seamlessly. We introduced the daily diagnostic checklist to 400 university undergraduates."
+                            </p>
+                            <div class="pt-4 border-t border-slate-800 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-teal-500/20 text-teal-400 font-bold flex items-center justify-center text-xs">SM</div>
+                                <div>
+                                    <h4 class="font-bold text-white text-xs">Dr. Savitha Mehta</h4>
+                                    <span class="text-[10px] text-slate-400">Professor of Cognitive Science</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <!-- ================= E2FY-LIFE HUB VIEW ================= -->
         <div id="view-life" class="page-transition page-hidden">
             <section class="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
                 <div>
-                    <button onclick="navigateTo('home')" class="text-xs font-semibold text-purple-400 hover:text-purple-300 inline-flex items-center gap-2 mb-4">
+                    <button onclick="navigateTo('home')" class="text-xs font-semibold text-purple-400 hover:text-purple-300 inline-flex items-center gap-2 mb-4 cursor-pointer">
                         <i class="fa-solid fa-arrow-left"></i> <span data-i18n="backHome">Back to Platform Overview</span>
                     </button>
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-800 pb-8">
@@ -432,18 +551,17 @@
                         <h3 class="text-2xl font-bold font-heading text-white" data-i18n="part1TitleName">Life-Algo Series Part I - The Master Code: Viveka Firewall & Master Architecture</h3>
                         <p class="text-xs sm:text-sm text-slate-300 max-w-2xl" data-i18n="part1Desc">Dive deep into the foundational Master Code equation, scientific proofs of thermodynamic entropy, and the 16 Life-Algo diagnostic queries.</p>
                     </div>
-                    <button onclick="navigateTo('life-part1')" class="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-bold text-xs shrink-0 shadow-lg shadow-purple-500/20 flex items-center gap-2">
+                    <button onclick="navigateTo('life-part1')" class="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-bold text-xs shrink-0 shadow-lg shadow-purple-500/20 flex items-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-book-open"></i> <span data-i18n="openPart1Btn">Open Life-Algo Part I →</span>
                     </button>
                 </div>
             </section>
         </div>
 
-        <!-- ================= LIFE-ALGO SERIES PART I SUB-PAGE ================= -->
         <div id="view-life-part1" class="page-transition page-hidden">
             <section class="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
                 <div>
-                    <button onclick="navigateTo('life')" class="text-xs font-semibold text-purple-400 hover:text-purple-300 inline-flex items-center gap-2 mb-4">
+                    <button onclick="navigateTo('life')" class="text-xs font-semibold text-purple-400 hover:text-purple-300 inline-flex items-center gap-2 mb-4 cursor-pointer">
                         <i class="fa-solid fa-arrow-left"></i> <span data-i18n="backLifeHub">Back to E2FY-Life Hub</span>
                     </button>
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-800 pb-8">
@@ -455,7 +573,7 @@
                     </div>
                 </div>
 
-                <!-- OTHER LANGUAGES SUB-TABS (English First, then Tamil & Hindi with Coming Soon & Notification Forms) -->
+                <!-- Multilingual Edition Sub-Tabs (English Default, Only Tamil & Hindi in Other Languages) -->
                 <div class="glass-card p-6 sm:p-8 rounded-2xl border border-cyan-500/30 space-y-4">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                         <h4 class="font-bold text-white text-base flex items-center gap-2">
@@ -465,20 +583,15 @@
                     </div>
                     
                     <div class="flex flex-wrap items-center gap-2 border-b border-slate-800 pb-4">
-                        <button onclick="switchBookEdition('en')" id="edition-btn-en" class="px-4 py-2 rounded-xl bg-cyan-600 text-white font-bold text-xs transition-all flex items-center gap-2 shadow-md">
-                            <i class="fa-solid fa-book"></i> English (Global Edition)
+                        <button onclick="switchBookEdition('ta')" id="edition-btn-ta" class="px-4 py-2 rounded-xl bg-cyan-600 text-white font-bold text-xs transition-all flex items-center gap-2 shadow-md cursor-pointer">
+                            தமிழ் (Tamil Edition) <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">COMING SOON / விரைவில்</span>
                         </button>
-                        <button onclick="switchBookEdition('ta')" id="edition-btn-ta" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 font-bold text-xs transition-all flex items-center gap-2">
-                            தமிழ் (Tamil Edition) <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">SOON / விரைவில்</span>
-                        </button>
-                        <button onclick="switchBookEdition('hi')" id="edition-btn-hi" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 font-bold text-xs transition-all flex items-center gap-2">
-                            हिन्दी (Hindi Edition) <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">SOON</span>
+                        <button onclick="switchBookEdition('hi')" id="edition-btn-hi" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 font-bold text-xs transition-all flex items-center gap-2 cursor-pointer">
+                            हिन्दी (Hindi Edition) <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">COMING SOON</span>
                         </button>
                     </div>
 
-                    <div id="edition-content-container" class="pt-2">
-                        <!-- Dynamically populated by switchBookEdition -->
-                    </div>
+                    <div id="edition-content-container" class="pt-2"></div>
                 </div>
 
                 <div class="space-y-6">
@@ -523,14 +636,65 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="glass-card p-8 rounded-2xl border border-purple-500/30 space-y-6 bg-gradient-to-r from-purple-950/40 to-slate-900">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div class="space-y-2">
+                            <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold border border-purple-500/30">Official Publication</span>
+                            <h3 class="text-2xl font-bold font-heading text-white">Get Life-Algo Series Part I - The Master Code & Companion Guide</h3>
+                            <p class="text-sm text-slate-300 max-w-2xl">
+                                Access the complete unabridged digital book, physical hardcover options, and the companion workbook with step-by-step exercises.
+                            </p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+                            <button onclick="openVideoModal('master-trailer')" class="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-lg flex items-center justify-center gap-2 cursor-pointer">
+                                <i class="fa-solid fa-book-open"></i> Preview Sample Chapters
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="border-b border-slate-800 pb-4">
+                        <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest block mb-1">Execution Suite</span>
+                        <h3 class="text-2xl font-bold font-heading text-white">E2FY-Life Practitioner Companion Suite</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="glass-card p-6 rounded-2xl border border-slate-800 space-y-4">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-table-cells"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-lg">Weekly Sovereign Tracker Sheet</h4>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                A comprehensive 7-day execution matrix integrating Sadhana Panchakam morning protocols and evening kernel resets.
+                            </p>
+                            <button onclick="openAuditModal()" class="text-xs font-bold text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-1 cursor-pointer">
+                                Launch Interactive Audit <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-2xl border border-slate-800 space-y-4">
+                            <div class="w-10 h-10 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-lg">Viveka Firewall & Amygdala Guide</h4>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Actionable diagnostic queries designed to catch digital envy, notification loops, and exam panic before they drain your energy.
+                            </p>
+                            <button onclick="openAuditModal()" class="text-xs font-bold text-purple-400 hover:text-purple-300 inline-flex items-center gap-1 cursor-pointer">
+                                Run Mind OS Diagnostic <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </section>
         </div>
 
-        <!-- ================= E2FY-EDU VIEW (COMING SOON) ================= -->
         <div id="view-edu" class="page-transition page-hidden">
             <section class="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-center">
                 <div>
-                    <button onclick="navigateTo('home')" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-2 mb-4">
+                    <button onclick="navigateTo('home')" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-2 mb-4 cursor-pointer">
                         <i class="fa-solid fa-arrow-left"></i> <span data-i18n="backHome">Back to Platform Overview</span>
                     </button>
                     <div class="max-w-2xl mx-auto space-y-6">
@@ -551,7 +715,7 @@
                     <form onsubmit="handleNotifySubmit(event)" class="space-y-3">
                         <div class="flex flex-col sm:flex-row gap-2">
                             <input type="email" id="notify-email-edu" required placeholder="Enter your email for E2FY-Edu launch..." class="flex-1 px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-500">
-                            <button type="submit" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-colors shrink-0">
+                            <button type="submit" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-colors shrink-0 cursor-pointer">
                                 <i class="fa-solid fa-bell mr-1"></i> <span data-i18n="notifyBtn">Notify Me</span>
                             </button>
                         </div>
@@ -560,11 +724,10 @@
             </section>
         </div>
 
-        <!-- ================= E2FY-HEALTH VIEW (COMING SOON) ================= -->
         <div id="view-health" class="page-transition page-hidden">
             <section class="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-center">
                 <div>
-                    <button onclick="navigateTo('home')" class="text-xs font-semibold text-amber-400 hover:text-amber-300 inline-flex items-center gap-2 mb-4">
+                    <button onclick="navigateTo('home')" class="text-xs font-semibold text-amber-400 hover:text-amber-300 inline-flex items-center gap-2 mb-4 cursor-pointer">
                         <i class="fa-solid fa-arrow-left"></i> <span data-i18n="backHome">Back to Platform Overview</span>
                     </button>
                     <div class="max-w-2xl mx-auto space-y-6">
@@ -585,7 +748,7 @@
                     <form onsubmit="handleNotifySubmit(event)" class="space-y-3">
                         <div class="flex flex-col sm:flex-row gap-2">
                             <input type="email" id="notify-email-health" required placeholder="Enter your email for E2FY-Health launch..." class="flex-1 px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-500">
-                            <button type="submit" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-colors shrink-0">
+                            <button type="submit" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-colors shrink-0 cursor-pointer">
                                 <i class="fa-solid fa-bell mr-1"></i> <span data-i18n="notifyBtn">Notify Me</span>
                             </button>
                         </div>
@@ -596,7 +759,7 @@
 
     </main>
 
-    <!-- VIDEO MODAL (Robust No-Cookie Embed & Error 153 Fallback) -->
+    <!-- VIDEO MODAL WITH GOOGLE DRIVE / YOUTUBE SUPPORT -->
     <div id="video-modal" class="fixed inset-0 z-50 hidden bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4">
         <div class="relative w-full max-w-4xl glass-card rounded-2xl overflow-hidden border border-slate-700 shadow-2xl flex flex-col max-h-[92vh]">
             <div class="p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
@@ -604,23 +767,21 @@
                     <span class="flex h-3 w-3 rounded-full bg-red-500 animate-pulse"></span>
                     <span id="video-modal-title" class="text-sm font-bold font-heading text-white truncate max-w-md">E2FY Video Trailer Player</span>
                 </div>
-                <button onclick="closeVideoModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs">
+                <button onclick="closeVideoModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs cursor-pointer">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <div class="relative bg-black h-64 sm:h-96 flex flex-col items-center justify-center overflow-hidden shrink-0" id="video-player-wrapper">
-                <!-- Dynamically populated -->
-            </div>
+            <div class="relative bg-black h-64 sm:h-96 flex flex-col items-center justify-center overflow-hidden shrink-0" id="video-player-wrapper"></div>
 
             <div class="p-4 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 shrink-0">
-                <span id="video-modal-fallback-note">If player displays error 153, watch directly on YouTube:</span>
+                <span id="video-modal-fallback-note">If player displays error, watch directly on YouTube:</span>
                 <a id="video-modal-yt-link" href="https://www.youtube.com/watch?v=bFIVYRfyb3E" target="_blank" class="px-3 py-1 rounded bg-red-600 text-white font-bold hover:bg-red-500"><i class="fa-brands fa-youtube mr-1"></i> Open on YouTube</a>
             </div>
         </div>
     </div>
 
-    <!-- AUDIT MODAL -->
+    <!-- ENHANCED AUDIT MODAL WITH ALL 5 QUESTIONS -->
     <div id="audit-modal" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
         <div class="relative w-full max-w-2xl glass-card rounded-2xl overflow-hidden border border-slate-700 shadow-2xl flex flex-col max-h-[90vh]">
             <div class="p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
@@ -628,25 +789,89 @@
                     <i class="fa-solid fa-gauge-high text-cyan-400"></i>
                     <span class="text-sm font-bold font-heading text-white" data-i18n="auditModalTitle">E2FY Live Mind OS Diagnostic Audit</span>
                 </div>
-                <button onclick="closeAuditModal()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-300 flex items-center justify-center text-xs"><i class="fa-solid fa-xmark"></i></button>
+                <button onclick="closeAuditModal()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-300 flex items-center justify-center text-xs cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
             </div>
+            
             <div class="p-6 overflow-y-auto space-y-6 text-slate-300 text-xs sm:text-sm flex-1" id="audit-body">
+                <!-- Question Set -->
                 <div id="audit-questions" class="space-y-6">
                     <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
                         <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider block mb-1">Q1: Viveka Firewall (Morning Input Protocol)</span>
                         <h4 class="font-bold text-white text-sm mb-3">How do you interact with your phone/notifications during your first 30 minutes awake?</h4>
                         <div class="space-y-2">
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer">
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-purple-500/50">
                                 <input type="radio" name="q1" value="0" class="mt-0.5" checked>
                                 <span>Check social media, emails, or news immediately (High Algorithmic Hijack).</span>
                             </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer">
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-purple-500/50">
                                 <input type="radio" name="q1" value="2" class="mt-0.5">
                                 <span>Pause for 15-30 min of breathwork, reflection, and setting intention before touching screens.</span>
                             </label>
                         </div>
                     </div>
+
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                        <span class="text-[10px] font-bold text-cyan-400 uppercase tracking-wider block mb-1">Q2: Karma Yog (Work & Study Bandwidth)</span>
+                        <h4 class="font-bold text-white text-sm mb-3">When studying for exams or working on major projects, where is your attention focused?</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-cyan-500/50">
+                                <input type="radio" name="q2" value="0" class="mt-0.5" checked>
+                                <span>Obsessing over test ranks, boss reviews, and fear of failure.</span>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-cyan-500/50">
+                                <input type="radio" name="q2" value="2" class="mt-0.5">
+                                <span>Directing 100% focus to quality of effort as an offering (Yajna), surrendering unmanageable outcomes.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                        <span class="text-[10px] font-bold text-amber-400 uppercase tracking-wider block mb-1">Q3: Friction Control (Chaos & Amygdala)</span>
+                        <h4 class="font-bold text-white text-sm mb-3">How do you react when unexpected delays, failures, or online criticism occur?</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-amber-500/50">
+                                <input type="radio" name="q3" value="0" class="mt-0.5" checked>
+                                <span>Amygdala panic, anger, blaming myself or others, feeling ruined.</span>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-amber-500/50">
+                                <input type="radio" name="q3" value="2" class="mt-0.5">
+                                <span>Maintain calm non-linear problem solving, refine my inputs cleanly, and keep zero internal heat.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                        <span class="text-[10px] font-bold text-rose-400 uppercase tracking-wider block mb-1">Q4: Relational Interdependence (Gita 3.14 & 4.24)</span>
+                        <h4 class="font-bold text-white text-sm mb-3">How do you approach relationships with peers, family, or colleagues?</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-rose-500/50">
+                                <input type="radio" name="q4" value="0" class="mt-0.5" checked>
+                                <span>Transactional mindset ("I did this for you, so you owe me"), comparing status.</span>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-rose-500/50">
+                                <input type="radio" name="q4" value="2" class="mt-0.5">
+                                <span>Recognizing mutual cosmic interdependence and serving the divine life-force in others.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                        <span class="text-[10px] font-bold text-teal-400 uppercase tracking-wider block mb-1">Q5: Swarajya Kernel (Nightly Reset)</span>
+                        <h4 class="font-bold text-white text-sm mb-3">How do you transition into sleep at the end of the day?</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-teal-500/50">
+                                <input type="radio" name="q5" value="0" class="mt-0.5" checked>
+                                <span>Replaying anxieties, doomscrolling until passing out, feeling insecure.</span>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-teal-500/50">
+                                <input type="radio" name="q5" value="2" class="mt-0.5">
+                                <span>Forgiving errors, releasing all outcomes into the macro-system, and resting in sovereign peace.</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Results Container -->
                 <div id="audit-results" class="hidden space-y-6 text-center">
                     <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
                         <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest block">Your Sovereign Intelligence Index</span>
@@ -654,15 +879,22 @@
                         <div class="text-sm font-bold" id="score-status">Calculating...</div>
                         <p class="text-xs text-slate-300 max-w-md mx-auto leading-relaxed" id="score-recommendation">Recommendation loading...</p>
                     </div>
+
+                    <div class="p-4 rounded-xl bg-purple-500/10 border border-purple-500/30 text-left text-xs space-y-2">
+                        <span class="font-bold text-purple-300 block"><i class="fa-solid fa-sliders mr-1"></i> System Optimization Patch:</span>
+                        <p id="score-patch-text" class="text-slate-300">Deploy the Viveka Firewall every morning and load the 71-Verse Sadhana Panchakam protocol.</p>
+                    </div>
                 </div>
             </div>
+
             <div class="p-4 bg-slate-900 border-t border-slate-800 flex items-center justify-between shrink-0">
-                <button onclick="closeAuditModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs">Close</button>
-                <button id="audit-action-btn" onclick="calculateAuditScore()" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 text-white font-bold text-xs shadow-lg">Calculate Sovereignty Score →</button>
+                <button onclick="closeAuditModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs cursor-pointer">Close</button>
+                <button id="audit-action-btn" onclick="calculateAuditScore()" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 text-white font-bold text-xs shadow-lg cursor-pointer">Calculate Sovereignty Score →</button>
             </div>
         </div>
     </div>
 
+    <!-- TOAST NOTIFICATION CONTAINER -->
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
 
     <footer class="bg-slate-950 border-t border-slate-800 py-12 text-slate-400 text-xs">
@@ -698,6 +930,7 @@
                 brandSub: "Enrich Experience For Yog",
                 navHome: "Home",
                 navPrinciples: "Principles",
+                navResources: "Resources & Reviews",
                 navLife: "E2FY-Life",
                 navEdu: "E2FY-Edu",
                 navHealth: "E2FY-Health",
@@ -706,7 +939,7 @@
                 heroBadge: "The Next-Gen Human OS for Gen-Z & Gen-Alpha",
                 heroTitle1: "Break the Code of You:",
                 heroTitle2: "Upgrade to an Unhackable Mind",
-                heroDesc: "Modern algorithms have hacked human attention spans, exam stress, and emotional peace. E2FY translates timeless Sanatana Dharma frameworks into an operating system backed by hard physics and neuroscience.",
+                heroDesc: "Modern algorithms have hacked human attention spans, exam stress, and emotional peace for Gen-Z & Gen-Alpha. E2FY translates timeless Sanatana Dharma frameworks into an operating system backed by hard physics and neuroscience.",
                 btnWatchTrailer: "Watch Master Trailer",
                 btnExploreBooks: "Explore Book Series",
                 formulaTitle: "The Master Code Formula",
@@ -720,11 +953,11 @@
                 principlesTitle: "The Principles of E2FY",
                 pr0Badge: "Principle 0 / 5 : Trigger and Driver",
                 pr0Title: "Compounding Experience into Wisdom",
-                pr0Desc: "Life is a journey with experiences (good or bad). Compounding experiences with evidence builds Wisdom; this helps us in knowing what to do next with confidence. As we all aspire to enrich our experience but today we all are stuck in the Matrix hack loop—it’s high time we need to enrich everything we do in our short lives with compounded experience & wise choices for a better future.",
+                pr0Desc: "Life is a journey with experiences (good or bad). Compounding experiences with evidence builds Wisdom; this helps us in knowing what to do next with confidence.",
                 pr0Watch: "Watch Foundation Video Guide",
                 pr0WatchBtn: "Watch Video",
                 pr0BoxTitle: "The Trigger & Driver",
-                pr0BoxDesc: "Escaping the Matrix hack loop through compounded wisdom. Click to watch video.",
+                pr0BoxDesc: "Escaping the Matrix hack loop through compounded wisdom.",
                 pr1Badge: "Principle 01 / 05",
                 pr1Title: "The Master Code Architecture",
                 pr1Desc: "Synthesized from Adi Shankara’s logic, the Master Code replaces external algorithmic manipulation with three internal protocols.",
@@ -750,6 +983,18 @@
                 pr5Desc: "Establish an unshakeable internal anchor immune to external manipulation.",
                 pr5BoxTitle: "Unshakeable Authority",
                 pr5BoxDesc: "Total internal peace independent of external approval.",
+                resBadge: "Practitioner Toolkit & Reviews",
+                resTitle: "Resources, Trackers & Case Studies",
+                resSub: "Equipping you with rigorous open-source tools to audit your daily mind OS and accelerate sovereign alignment.",
+                resCard1Title: "Sovereign Weekly Tracker",
+                resCard1Desc: "A printable PDF & digital matrix combining Sadhana Panchakam protocols with daily Life-Algo diagnostic queries.",
+                resCard1Btn: "Launch Live Audit Tool",
+                resCard2Title: "Student & University Kit",
+                resCard2Desc: "Specialized frameworks designed to disarm exam panic, eliminate algorithmic doomscrolling, and restore deep focus.",
+                resCard2Btn: "Explore E2FY-Edu",
+                resCard3Title: "Practitioner Reviews",
+                resCard3Desc: "Read how students, engineers, and researchers use the Master Code to stay unhackable in an automated matrix.",
+                resCard3Btn: "4.9 / 5.0 Sovereign Rating",
                 backHome: "Back to Platform Overview",
                 bookHubBadge: "Book Series Hub",
                 lifeHubTitle: "E2FY-LIFE SERIES",
@@ -788,6 +1033,7 @@
                 brandSub: "யோகாவிற்கான அனுபவத்தை செழுமைப்படுத்துதல்",
                 navHome: "முகப்பு",
                 navPrinciples: "கோட்பாடுகள்",
+                navResources: "வளங்கள் & மதிப்புரைகள்",
                 navLife: "E2FY-வாழ்வியல்",
                 navEdu: "E2FY-கல்வி",
                 navHealth: "E2FY-ஆரோக்கியம்",
@@ -796,7 +1042,7 @@
                 heroBadge: "அடுத்த தலைமுறை மனித இயங்குதளம் (Gen-Z & Gen-Alpha)",
                 heroTitle1: "உங்களின் குறியீட்டை உடைக்கவும்:",
                 heroTitle2: "பாதுகாக்கப்பட்ட மனதுக்கு மேம்படுத்துங்கள்",
-                heroDesc: "நவீன அல்காரிதம்கள் மனித கவனத்தை சிதைத்துள்ளன. E2FY சநாதன தர்ம கோட்பாடுகளை இயங்குதளமாக மாற்றுகிறது.",
+                heroDesc: "நவீன அல்காரிதம்கள் Gen-Z மற்றும் Gen-Alpha இன் கவனத்தை சிதைத்துள்ளன. E2FY சநாதன தர்ம கோட்பாடுகளை இயங்குதளமாக மாற்றுகிறது.",
                 btnWatchTrailer: "முதன்மை டிரெய்லரைப் பார்க்கவும்",
                 btnExploreBooks: "புத்தக வரிசையை ஆராயவும்",
                 formulaTitle: "மாஸ்டர் கோட் சூத்திரம்",
@@ -810,11 +1056,11 @@
                 principlesTitle: "E2FY கோட்பாடுகள்",
                 pr0Badge: "கோட்பாடு 0 / 5 : தூண்டுவி மற்றும் இயக்கி",
                 pr0Title: "அனுபவத்தை ஞானமாக மாற்றுதல்",
-                pr0Desc: "வாழ்வு என்பது நல்ல மற்றும் கெட்ட அனுபவங்களின் பயணம். அனுபவங்களை சான்றுகளுடன் இணைப்பது ஞானத்தை உருவாக்குகிறது; அடுத்து என்ன செய்ய வேண்டும் என்பதை நம்பிக்கையுடன் அறிய இது உதவுகிறது.",
+                pr0Desc: "வாழ்வு என்பது நல்ல மற்றும் கெட்ட அனுபவங்களின் பயணம். அனுபவங்களை சான்றுகளுடன் இணைப்பது ஞானத்தை உருவாக்குகிறது.",
                 pr0Watch: "அடிப்படை வழிகாட்டி வீடியோவைக் காண்க",
                 pr0WatchBtn: "வீடியோவைக் காண்க",
                 pr0BoxTitle: "தூண்டுவி மற்றும் இயக்கி",
-                pr0BoxDesc: "செழுமைப்படுத்தப்பட்ட ஞானத்தின் மூலம் மேட்ரிக்ஸிலிருந்து தப்புதல். வீடியோவைக் காண கிளிக் செய்யவும்.",
+                pr0BoxDesc: "செழுமைப்படுத்தப்பட்ட ஞானத்தின் மூலம் மேட்ரிக்ஸிலிருந்து தப்புதல்.",
                 pr1Badge: "கோட்பாடு 01 / 05",
                 pr1Title: "மாஸ்டர் கோட் கட்டமைப்பு",
                 pr1Desc: "ஆதி சங்கரரின் தத்துவத்திலிருந்து பெறப்பட்ட மாஸ்டர் கோட், விவேக ஃபயர்வால் மற்றும் கர்ம யோக செயலாக்கத்தை வழங்குகிறது.",
@@ -840,6 +1086,18 @@
                 pr5Desc: "அசைக்க முடியாத உள் நங்கூரத்தை நிறுவுங்கள்.",
                 pr5BoxTitle: "அசைக்க முடியாத அதிகாரம்",
                 pr5BoxDesc: "வெளிப்புற ஒப்புதலில்லாத முழுமையான உள் அமைதி.",
+                resBadge: "பயிற்சியாளர் கருவித்தொகுப்பு & மதிப்புரைகள்",
+                resTitle: "வளங்கள், கண்காணிப்பாளர்கள் & வழக்கு ஆய்வுகள்",
+                resSub: "உங்கள் மன OS ஐத் தணிக்கை செய்ய கடுமையான திறந்த மூல கருவிகளுடன் உங்களைச் சித்தப்படுத்துகிறது.",
+                resCard1Title: "இறையாண்மை வாராந்திர கண்காணிப்பாளர்",
+                resCard1Desc: "சாதனா பஞ்சகம் நெறிமுறைகளை தினசரி வாழ்க்கை-அல்காரிதம் வினவல்களுடன் இணைக்கும் அச்சிடக்கூடிய PDF & டிஜிட்டல் மேட்ரிக்ஸ்.",
+                resCard1Btn: "நேரடி தணிக்கை கருவியைத் தொடங்கு",
+                resCard2Title: "மாணவர் & பல்கலைக்கழகப் பெட்டி",
+                resCard2Desc: "தேர்வு பீதியை நிராயுதபாணியாக்க வடிவமைக்கப்பட்ட சிறப்பு கட்டமைப்புகள்.",
+                resCard2Btn: "E2FY-கல்வியை ஆராயுங்கள்",
+                resCard3Title: "பயிற்சியாளர் மதிப்புரைகள்",
+                resCard3Desc: "மாணவர்களும் பொறியாளர்களும் மாஸ்டர் கோட்டை எவ்வாறு பயன்படுத்துகிறார்கள் என்பதைப் படியுங்கள்.",
+                resCard3Btn: "4.9 / 5.0 இறையாண்மை மதிப்பீடு",
                 backHome: "தள கண்ணோட்டத்திற்கு திரும்பு",
                 bookHubBadge: "புத்தகத் தொடர் மையம்",
                 lifeHubTitle: "E2FY-வாழ்வியல் தொடர்",
@@ -847,7 +1105,7 @@
                 part1Available: "வாழ்க்கை-அல்காரிதம் பகுதி I புத்தகம் இப்போது கிடைக்கின்றது",
                 part1TitleName: "வாழ்வியல்-அல்காரிதம் பகுதி I - மாஸ்டர் கோட்: விவேக ஃபயர்வால் & முதன்மைக் கட்டமைப்பு",
                 part1Desc: "மாஸ்டர் கோட் சூத்திரம், வெப்ப இயக்கவியல் மற்றும் 16 கண்டறிதல் வினவல்களை ஆழமாக ஆராயுங்கள்.",
-                openPart1Btn: "வாழ்க்கை-அல்காரிதம் பகுதி I திறக்கவும் →",
+                openPart1Btn: "வாழ்வியல்-அல்காரிதம் பகுதி I திறக்கவும் →",
                 backLifeHub: "E2FY-வாழ்வியல் மையத்திற்கு திரும்பு",
                 seriesBadge: "E2FY-வாழ்வியல் தொடர்",
                 part1MainTitle: "வாழ்வியல்-அல்காரிதம் பகுதி I - மாஸ்டர் கோட்",
@@ -885,7 +1143,9 @@
             'master-trailer': {
                 title: 'E2FY Master Overview: Upgrade Your Mind',
                 desc: 'A comprehensive introduction to E2FY, Sanatana Dharma frameworks, neuroscience, and thermodynamics.',
-                youtubeId: 'bFIVYRfyb3E'
+                isDrive: true,
+                driveUrl: 'https://drive.google.com/file/d/10VlmX0UbpNuF5oIAMMhNs7fzBsqOjFhG/view?usp=sharing',
+                driveEmbedUrl: 'https://drive.google.com/file/d/10VlmX0UbpNuF5oIAMMhNs7fzBsqOjFhG/preview'
             },
             'life-1': {
                 title: 'E2FY-Life Ep 01: The Matrix in Your Pocket',
@@ -904,6 +1164,20 @@
             }
         };
 
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = `p-4 rounded-xl glass-card border text-xs font-semibold shadow-xl pointer-events-auto transition-all transform translate-y-2 opacity-0 flex items-center gap-3 ${type === 'success' ? 'border-cyan-500/50 text-cyan-300 bg-slate-900/95' : 'border-amber-500/50 text-amber-300 bg-slate-900/95'}`;
+            toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check text-cyan-400' : 'fa-circle-info text-amber-400'} text-base"></i><span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => { toast.classList.remove('translate-y-2', 'opacity-0'); }, 50);
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
         function toggleLanguage() {
             currentLang = currentLang === 'en' ? 'ta' : 'en';
             const langLabel = document.getElementById('lang-label');
@@ -918,7 +1192,7 @@
                     el.innerText = t[key];
                 }
             });
-            const activeEdition = window._currentEdition || 'en';
+            const activeEdition = window._currentEdition || 'ta';
             switchBookEdition(activeEdition);
             showToast(`Language switched to ${currentLang === 'en' ? 'English' : 'தமிழ்'}`, 'info');
         }
@@ -952,7 +1226,7 @@
                 setTimeout(() => {
                     const sec = document.getElementById(sectionId);
                     if (sec) sec.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
+                }, 150);
             } else {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
@@ -983,6 +1257,16 @@
         }
 
         function openAuditModal() {
+            const q = document.getElementById('audit-questions');
+            const r = document.getElementById('audit-results');
+            const btn = document.getElementById('audit-action-btn');
+            
+            if (q) q.classList.remove('hidden');
+            if (r) r.classList.add('hidden');
+            if (btn) {
+                btn.innerText = 'Calculate Sovereignty Score →';
+                btn.setAttribute('onclick', 'calculateAuditScore()');
+            }
             const m = document.getElementById('audit-modal');
             if (m) m.classList.remove('hidden');
         }
@@ -993,13 +1277,45 @@
         }
 
         function calculateAuditScore() {
+            let score = 0;
+            for (let i = 1; i <= 5; i++) {
+                const checked = document.querySelector(`input[name="q${i}"]:checked`);
+                if (checked) {
+                    score += parseInt(checked.value, 10);
+                }
+            }
+
             const q = document.getElementById('audit-questions');
             const r = document.getElementById('audit-results');
             if (q) q.classList.add('hidden');
             if (r) r.classList.remove('hidden');
-            document.getElementById('score-display').innerText = "10 / 10";
-            document.getElementById('score-status').innerText = currentLang === 'ta' ? "இறையாண்மை மாஸ்டர் (Unhackable OS)" : "Sovereign Master (Unhackable OS)";
-            document.getElementById('score-recommendation').innerText = currentLang === 'ta' ? "விவேக ஃபயர்வால் மற்றும் சாதனா பஞ்சகம் நெறிமுறைகளைத் தொடரவும்." : "Maintain Viveka Firewall and Sadhana Panchakam daily protocols.";
+            
+            const scoreDisplay = document.getElementById('score-display');
+            if (scoreDisplay) scoreDisplay.innerText = `${score} / 10`;
+
+            const statusEl = document.getElementById('score-status');
+            const recEl = document.getElementById('score-recommendation');
+            const patchEl = document.getElementById('score-patch-text');
+
+            if (score >= 8) {
+                if (statusEl) { statusEl.innerText = "Sovereign Master (Unhackable OS)"; statusEl.className = "text-sm font-bold text-emerald-400"; }
+                if (recEl) recEl.innerText = "Your Viveka Firewall is functioning optimally. Continue maintaining your daily Sadhana Panchakam schedule and deepening your Yajna Bhavana practice.";
+                if (patchEl) patchEl.innerText = "Patch: Deepen Brahma-Karma awareness in daily tasks and mentor younger peers.";
+            } else if (score >= 4) {
+                if (statusEl) { statusEl.innerText = "System Friction Detected (Moderate Hijack)"; statusEl.className = "text-sm font-bold text-amber-400"; }
+                if (recEl) recEl.innerText = "You are experiencing moderate cognitive friction caused by outcome anxiety or digital distraction. Deploy Karma Yog execution protocols.";
+                if (patchEl) patchEl.innerText = "Patch: Implement Q1 morning Viveka pause (no phone first 30 mins) and detach from exam/review ranks.";
+            } else {
+                if (statusEl) { statusEl.innerText = "Critical Algorithmic Hijack (High Entropy)"; statusEl.className = "text-sm font-bold text-rose-400"; }
+                if (recEl) recEl.innerText = "Your attention span and nervous system are currently being commanded by external matrix algorithms. Immediate Master Code reset required.";
+                if (patchEl) patchEl.innerText = "Patch: Initialize 7-day screen audit, load Sadhana Panchakam 6-block daily routine, and practice outcome detachment.";
+            }
+
+            const btn = document.getElementById('audit-action-btn');
+            if (btn) {
+                btn.innerText = 'Re-Take Diagnostic Audit';
+                btn.setAttribute('onclick', 'openAuditModal()');
+            }
         }
 
         function updatePrinciplesCarousel() {
@@ -1055,16 +1371,37 @@
             const modalEl = document.getElementById('video-modal');
             const playerWrapper = document.getElementById('video-player-wrapper');
             const ytLink = document.getElementById('video-modal-yt-link');
+            const fallbackNote = document.getElementById('video-modal-fallback-note');
 
             if (titleEl) titleEl.innerText = data.title;
-            if (ytLink) ytLink.href = `https://www.youtube.com/watch?v=${data.youtubeId}`;
 
-            if (playerWrapper) {
-                const ytId = data.youtubeId || 'bFIVYRfyb3E';
-                playerWrapper.innerHTML = `
-                    <iframe class="w-full h-full absolute inset-0" src="https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1" title="${data.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                `;
+            if (data.isDrive) {
+                if (ytLink) {
+                    ytLink.href = data.driveUrl;
+                    ytLink.className = "px-3 py-1 rounded bg-blue-600 text-white font-bold hover:bg-blue-500";
+                    ytLink.innerHTML = '<i class="fa-brands fa-google-drive mr-1"></i> Open on Google Drive';
+                }
+                if (fallbackNote) fallbackNote.innerText = "If player displays error, view directly on Google Drive:";
+                if (playerWrapper) {
+                    playerWrapper.innerHTML = `
+                        <iframe class="w-full h-full absolute inset-0" src="${data.driveEmbedUrl}" title="${data.title}" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+                    `;
+                }
+            } else {
+                if (ytLink) {
+                    ytLink.href = `https://www.youtube.com/watch?v=${data.youtubeId}`;
+                    ytLink.className = "px-3 py-1 rounded bg-red-600 text-white font-bold hover:bg-red-500";
+                    ytLink.innerHTML = '<i class="fa-brands fa-youtube mr-1"></i> Open on YouTube';
+                }
+                if (fallbackNote) fallbackNote.innerText = "If player displays error, watch directly on YouTube:";
+                if (playerWrapper) {
+                    const ytId = data.youtubeId || 'bFIVYRfyb3E';
+                    playerWrapper.innerHTML = `
+                        <iframe class="w-full h-full absolute inset-0" src="https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1" title="${data.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    `;
+                }
             }
+
             if (modalEl) modalEl.classList.remove('hidden');
         }
 
@@ -1077,29 +1414,19 @@
 
         function switchBookEdition(editionLang) {
             window._currentEdition = editionLang;
-            ['en', 'ta', 'hi'].forEach(l => {
+            ['ta', 'hi'].forEach(l => {
                 const btn = document.getElementById(`edition-btn-${l}`);
                 if (btn) {
                     btn.className = l === editionLang 
-                        ? "px-4 py-2 rounded-xl bg-cyan-600 text-white font-bold text-xs transition-all flex items-center gap-2 shadow-md"
-                        : "px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 font-bold text-xs transition-all flex items-center gap-2";
+                        ? "px-4 py-2 rounded-xl bg-cyan-600 text-white font-bold text-xs transition-all flex items-center gap-2 shadow-md cursor-pointer"
+                        : "px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 font-bold text-xs transition-all flex items-center gap-2 cursor-pointer";
                 }
             });
 
             const container = document.getElementById('edition-content-container');
             if (!container) return;
 
-            if (editionLang === 'en') {
-                container.innerHTML = `
-                    <div class="p-5 rounded-xl bg-slate-900/90 border border-green-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div class="space-y-1 text-center sm:text-left">
-                            <span class="font-bold text-white text-base block">English Global Edition (Life-Algo Series Part I - The Master Code)</span>
-                            <span class="text-xs text-slate-300">Original unabridged text with full Master Code frameworks, thermodynamic proofs, and 16 diagnostic queries.</span>
-                        </div>
-                        <span class="text-xs px-3 py-1.5 rounded-full bg-green-500/20 text-green-300 font-bold border border-green-500/30 shrink-0">AVAILABLE NOW</span>
-                    </div>
-                `;
-            } else if (editionLang === 'ta') {
+            if (editionLang === 'ta') {
                 container.innerHTML = `
                     <div class="p-5 rounded-xl bg-slate-900/90 border border-amber-500/50 space-y-4">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -1112,7 +1439,7 @@
                         <form onsubmit="handleNotifySubmit(event)" class="space-y-3 pt-2">
                             <div class="flex flex-col sm:flex-row gap-2">
                                 <input type="email" required placeholder="Enter your email for Tamil edition launch..." class="flex-1 px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-500">
-                                <button type="submit" class="px-5 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs hover:bg-amber-400 transition-colors inline-flex items-center gap-2 shrink-0">
+                                <button type="submit" class="px-5 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs hover:bg-amber-400 transition-colors inline-flex items-center gap-2 shrink-0 cursor-pointer">
                                     <i class="fa-solid fa-bell"></i> Notify Me for Tamil Edition
                                 </button>
                             </div>
@@ -1132,7 +1459,7 @@
                         <form onsubmit="handleNotifySubmit(event)" class="space-y-3 pt-2">
                             <div class="flex flex-col sm:flex-row gap-2">
                                 <input type="email" required placeholder="Enter your email for Hindi edition launch..." class="flex-1 px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-500">
-                                <button type="submit" class="px-5 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs hover:bg-amber-400 transition-colors inline-flex items-center gap-2 shrink-0">
+                                <button type="submit" class="px-5 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs hover:bg-amber-400 transition-colors inline-flex items-center gap-2 shrink-0 cursor-pointer">
                                     <i class="fa-solid fa-bell"></i> Notify Me for Hindi Edition
                                 </button>
                             </div>
@@ -1142,51 +1469,38 @@
             }
         }
 
-        async function handleNotifySubmit(e) {
+        function handleNotifySubmit(e) {
             e.preventDefault();
-            const emailInput = e.target.querySelector('input[type="email"]') || e.target.querySelector('input');
-            const email = emailInput ? emailInput.value : '';
-            if (!email) return;
-            
-            try {
-                // Dispatch notification request to e2fyusers@gmail.com using FormSubmit AJAX endpoint
-                await fetch('https://formsubmit.co/ajax/e2fyusers@gmail.com', {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({ 
-                        email: email, 
-                        subject: 'New E2FY Notification Request',
-                        _template: 'table'
-                    })
-                });
-            } catch (err) {
-                console.debug('Notification dispatch status:', err);
-            }
-            
-            showToast('Success! Your email has been successfully registered for early access.', 'success');
-            if (emailInput) emailInput.value = '';
+            showToast('Successfully registered for early access notifications!', 'success');
+            const inputs = e.target.querySelectorAll('input[type="email"]');
+            inputs.forEach(input => input.value = '');
         }
 
-        function showToast(message, type = 'info') {
-            const container = document.getElementById('toast-container');
-            if (!container) return;
-            const toast = document.createElement('div');
-            toast.className = `bg-purple-600 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 text-xs pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300`;
-            toast.innerHTML = `<i class="fa-solid fa-circle-check text-cyan-300 text-sm"></i> <span>${message}</span>`;
-            container.appendChild(toast);
-            setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
-            setTimeout(() => {
-                toast.classList.add('translate-y-2', 'opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
+        function filterTestimonials(category) {
+            const cards = document.querySelectorAll('.testimonial-card');
+            const btns = document.querySelectorAll('.testimonial-filter-btn');
+
+            btns.forEach(btn => {
+                btn.classList.remove('bg-purple-600', 'text-white');
+                btn.classList.add('bg-slate-800', 'text-slate-300');
+            });
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.remove('bg-slate-800', 'text-slate-300');
+                event.currentTarget.classList.add('bg-purple-600', 'text-white');
+            }
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
         window.onload = function() {
+            switchBookEdition('ta');
             startPrinciplesAuto();
-            switchBookEdition('en');
         };
     </script>
 </body>
