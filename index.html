@@ -193,6 +193,7 @@
 
     <main class="flex-1">
 
+        <!-- VIEW: HOME -->
         <div id="view-home" class="page-transition page-visible">
             <section class="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-32">
                 <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-purple-600/20 via-cyan-500/20 to-amber-500/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
@@ -277,6 +278,7 @@
                 </div>
             </section>
 
+            <!-- PRINCIPLES SLIDER SECTION -->
             <section id="principles" class="py-20 relative bg-slate-900/40 border-t border-slate-800">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
@@ -294,11 +296,12 @@
                         </div>
                     </div>
 
-                    <div class="relative overflow-hidden rounded-3xl glass-card border border-slate-800 p-6 sm:p-10">
-                        <div id="principles-track" class="flex transition-transform duration-500 ease-in-out">
+                    <!-- SLIDER CONTAINER WITH TOUCH SUPPORT -->
+                    <div class="relative overflow-hidden rounded-3xl glass-card border border-slate-800 p-6 sm:p-10" id="principles-carousel-container">
+                        <div id="principles-track" class="flex transition-transform duration-500 ease-in-out w-full">
                             
                             <!-- Principle 0 / 5: Trigger & Driver -->
-                            <div class="w-full shrink-0 pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="w-full shrink-0 flex-none pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                                 <div class="lg:col-span-7 space-y-4">
                                     <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold" data-i18n="pr0Badge">Principle 0 / 5 : Trigger and Driver</span>
                                     <h3 class="text-2xl sm:text-3xl font-bold font-heading text-amber-300" data-i18n="pr0Title">Compounding Experience into Wisdom</h3>
@@ -306,7 +309,7 @@
                                         Life is a journey with experiences (good or bad). Compounding experiences with evidence builds Wisdom; this helps us in knowing what to do next with confidence. As we all aspire to enrich our experience but today we all are stuck in the Matrix hack loop—it’s high time we need to enrich everything we do in our short lives with compounded experience & wise choices for a better future.
                                     </p>
                                     <div class="p-4 rounded-xl bg-slate-950/80 border border-amber-500/30 text-xs font-mono text-amber-200 flex items-center justify-between">
-                                        <span data-i18n="pr0Watch">Watch Foundation Video Guide</span>
+                                        <span data-i18n="pr0Watch">Watch Foundation Guide Video</span>
                                         <button onclick="openVideoModal('principle-0')" class="px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-bold hover:bg-amber-400 transition-colors inline-flex items-center gap-1 cursor-pointer shadow-md">
                                             <i class="fa-solid fa-play text-xs"></i> <span data-i18n="pr0WatchBtn">Watch Video</span>
                                         </button>
@@ -320,7 +323,7 @@
                             </div>
 
                             <!-- Principle 1 -->
-                            <div class="w-full shrink-0 pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="w-full shrink-0 flex-none pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                                 <div class="lg:col-span-7 space-y-4">
                                     <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold" data-i18n="pr1Badge">Principle 01 / 05</span>
                                     <h3 class="text-2xl sm:text-3xl font-bold font-heading text-purple-300" data-i18n="pr1Title">The Master Code Architecture</h3>
@@ -336,7 +339,7 @@
                             </div>
 
                             <!-- Principle 2 -->
-                            <div class="w-full shrink-0 pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="w-full shrink-0 flex-none pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                                 <div class="lg:col-span-7 space-y-4">
                                     <span class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-bold" data-i18n="pr2Badge">Principle 02 / 05</span>
                                     <h3 class="text-2xl sm:text-3xl font-bold font-heading text-cyan-300" data-i18n="pr2Title">The Cosmic Interdependence Cycle</h3>
@@ -352,7 +355,7 @@
                             </div>
 
                             <!-- Principle 3 -->
-                            <div class="w-full shrink-0 pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="w-full shrink-0 flex-none pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                                 <div class="lg:col-span-7 space-y-4">
                                     <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold" data-i18n="pr3Badge">Principle 03 / 05</span>
                                     <h3 class="text-2xl sm:text-3xl font-bold font-heading text-amber-300" data-i18n="pr3Title">Meditation in Action (Brahma-Karma)</h3>
@@ -368,7 +371,7 @@
                             </div>
 
                             <!-- Principle 4 -->
-                            <div class="w-full shrink-0 pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="w-full shrink-0 flex-none pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                                 <div class="lg:col-span-7 space-y-4">
                                     <span class="px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold" data-i18n="pr4Badge">Principle 04 / 05</span>
                                     <h3 class="text-2xl sm:text-3xl font-bold font-heading text-rose-300" data-i18n="pr4Title">The Digital Amygdala Firewall</h3>
@@ -384,7 +387,7 @@
                             </div>
 
                             <!-- Principle 5 -->
-                            <div class="w-full shrink-0 pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="w-full shrink-0 flex-none pr-0 lg:pr-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                                 <div class="lg:col-span-7 space-y-4">
                                     <span class="px-3 py-1 rounded-full bg-teal-500/20 text-teal-300 text-xs font-bold" data-i18n="pr5Badge">Principle 05 / 05</span>
                                     <h3 class="text-2xl sm:text-3xl font-bold font-heading text-teal-300" data-i18n="pr5Title">Sovereign Consciousness (Swarajya)</h3>
@@ -447,7 +450,6 @@
                         </button>
                     </div>
 
-                    <!-- Enhanced Practitioner Reviews Card with Scroll Action -->
                     <div class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4 hover:border-amber-500/50 transition-all cursor-pointer" onclick="document.getElementById('testimonials').scrollIntoView({ behavior: 'smooth' })">
                         <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl font-bold">
                             <i class="fa-solid fa-star"></i>
@@ -462,7 +464,6 @@
                     </div>
                 </div>
 
-                <!-- Testimonials / Practitioner Reviews & Impact Section -->
                 <div class="pt-12 border-t border-slate-800 space-y-8" id="testimonials">
                     <div class="text-center max-w-2xl mx-auto space-y-2">
                         <span class="text-xs font-bold text-amber-400 uppercase tracking-widest block">Generation Feedback</span>
@@ -530,6 +531,7 @@
             </section>
         </div>
 
+        <!-- VIEW: E2FY-LIFE HUB -->
         <div id="view-life" class="page-transition page-hidden">
             <section class="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
                 <div>
@@ -558,102 +560,143 @@
             </section>
         </div>
 
+        <!-- VIEW: LIFE-ALGO PART I -->
         <div id="view-life-part1" class="page-transition page-hidden">
             <section class="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <!-- HEADER WITH TOP-RIGHT LANGUAGES SELECTOR -->
                 <div>
                     <button onclick="navigateTo('life')" class="text-xs font-semibold text-purple-400 hover:text-purple-300 inline-flex items-center gap-2 mb-4 cursor-pointer">
                         <i class="fa-solid fa-arrow-left"></i> <span data-i18n="backLifeHub">Back to E2FY-Life Hub</span>
                     </button>
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-800 pb-8">
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-slate-800 pb-8">
                         <div>
                             <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold border border-purple-500/30" data-i18n="seriesBadge">E2FY-Life Series</span>
                             <h1 class="text-3xl sm:text-5xl font-extrabold font-heading text-white mt-3" data-i18n="part1MainTitle">Life-Algo Series Part I - The Master Code</h1>
-                            <p class="text-base text-purple-300 font-medium" data-i18n="part1MainSub">Foundational Architecture, Viveka Firewall & Scientific Proofs</p>
+                            <p class="text-base text-purple-300 font-medium mt-1" data-i18n="part1MainSub">Foundational Architecture, Viveka Firewall & Scientific Proofs</p>
+                        </div>
+
+                        <!-- TOP-RIGHT MULTILINGUAL EDITION SELECTOR WIDGET -->
+                        <div class="glass-card p-4 rounded-2xl border border-cyan-500/30 space-y-3 shrink-0 lg:max-w-xs w-full">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                                <span class="text-xs font-bold text-white flex items-center gap-1.5">
+                                    <i class="fa-solid fa-globe text-cyan-400"></i> <span data-i18n="otherLangTitle">Other Languages</span>
+                                </span>
+                                <span class="text-[10px] text-slate-400" data-i18n="otherLangSub">Select Edition</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button onclick="switchBookEdition('ta')" id="edition-btn-ta" class="flex-1 py-1.5 px-3 rounded-lg bg-cyan-600 text-white font-bold text-[11px] transition-all flex items-center justify-center gap-1 cursor-pointer">
+                                    தமிழ்
+                                </button>
+                                <button onclick="switchBookEdition('hi')" id="edition-btn-hi" class="flex-1 py-1.5 px-3 rounded-lg bg-slate-900 text-slate-300 hover:bg-slate-800 font-bold text-[11px] transition-all flex items-center justify-center gap-1 cursor-pointer">
+                                    हिन्दी
+                                </button>
+                            </div>
+                            <div id="edition-content-container" class="text-[11px] text-slate-300"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Multilingual Edition Sub-Tabs (English Default, Only Tamil & Hindi in Other Languages) -->
-                <div class="glass-card p-6 sm:p-8 rounded-2xl border border-cyan-500/30 space-y-4">
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                        <h4 class="font-bold text-white text-base flex items-center gap-2">
-                            <i class="fa-solid fa-globe text-cyan-400"></i> <span data-i18n="otherLangTitle">Other Languages & Editions</span>
-                        </h4>
-                        <span class="text-xs text-slate-400" data-i18n="otherLangSub">Select Book Edition Language</span>
-                    </div>
-                    
-                    <div class="flex flex-wrap items-center gap-2 border-b border-slate-800 pb-4">
-                        <button onclick="switchBookEdition('ta')" id="edition-btn-ta" class="px-4 py-2 rounded-xl bg-cyan-600 text-white font-bold text-xs transition-all flex items-center gap-2 shadow-md cursor-pointer">
-                            தமிழ் (Tamil Edition) <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">COMING SOON / விரைவில்</span>
+                <!-- BOOK TRAILER SECTION -->
+                <div class="glass-card p-6 sm:p-8 rounded-2xl border border-purple-500/30 bg-gradient-to-r from-purple-950/30 via-slate-900 to-cyan-950/30 space-y-6">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div class="space-y-2 max-w-2xl">
+                            <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold border border-amber-500/30 inline-flex items-center gap-1.5">
+                                <i class="fa-solid fa-film text-amber-400"></i> Featured Book Trailer
+                            </span>
+                            <h3 class="text-2xl font-bold font-heading text-white">Official Book Launch Trailer: Life-Algo Series Part I</h3>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Watch the official cinematic overview of Life-Algo Series Part I. Discover how Adi Shankara's logic and thermodynamic entropy merge to create an unhackable mind operating system.
+                            </p>
+                        </div>
+                        <button onclick="openVideoModal('master-trailer')" class="px-6 py-4 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-bold text-xs shadow-lg shadow-purple-500/25 flex items-center justify-center gap-2 shrink-0 cursor-pointer">
+                            <i class="fa-solid fa-circle-play text-base"></i> Watch Book Trailer (HD)
                         </button>
-                        <button onclick="switchBookEdition('hi')" id="edition-btn-hi" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 font-bold text-xs transition-all flex items-center gap-2 cursor-pointer">
-                            हिन्दी (Hindi Edition) <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">COMING SOON</span>
-                        </button>
                     </div>
-
-                    <div id="edition-content-container" class="pt-2"></div>
                 </div>
 
-                <div class="space-y-6">
-                    <h3 class="text-2xl font-bold font-heading text-white flex items-center gap-2">
-                        <i class="fa-solid fa-film text-purple-400"></i> <span data-i18n="trailerSeriesTitle">Life-Algo Series Part I Video Trailer Series</span>
-                    </h3>
+                <!-- SECTION: BOOK INSIGHT EPISODES -->
+                <div class="space-y-6 scroll-mt-24" id="book-videos">
+                    <div class="border-b border-slate-800 pb-3 flex items-center justify-between">
+                        <h3 class="text-2xl font-bold font-heading text-white flex items-center gap-2">
+                            <i class="fa-solid fa-tv text-purple-400"></i> <span data-i18n="bookInsightTitle">Book Insight Episodes</span>
+                        </h3>
+                        <span class="text-xs font-bold text-cyan-400">3 Teaser Episodes</span>
+                    </div>
+
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Episode 01 -->
                         <div class="glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-purple-500/50 transition-all group cursor-pointer" onclick="openVideoModal('life-1')">
                             <div class="relative h-44 bg-gradient-to-tr from-purple-950 via-slate-900 to-slate-950 flex items-center justify-center p-4">
+                                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-purple-600/80 text-white font-bold text-[10px] tracking-wider uppercase">Episode 01</span>
+                                <span class="absolute top-3 right-3 px-2 py-0.5 rounded-md bg-amber-500/30 border border-amber-500/40 text-amber-300 font-bold text-[9px] uppercase tracking-wider">Coming Soon Teaser</span>
                                 <div class="w-12 h-12 rounded-full bg-purple-600 text-white flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition-transform">
                                     <i class="fa-solid fa-play ml-0.5"></i>
                                 </div>
                             </div>
                             <div class="p-5 space-y-2">
-                                <h4 class="font-bold text-white text-sm" data-i18n="tr1Title">Trailer 01: The Matrix in Your Pocket</h4>
-                                <p class="text-xs text-slate-400" data-i18n="tr1Desc">How predatory algorithms extract attention and how to deploy the Viveka Firewall.</p>
+                                <h4 class="font-bold text-white text-sm" data-i18n="ep1Title">Episode 01: The Matrix in Your Pocket</h4>
+                                <p class="text-xs text-slate-400" data-i18n="ep1Desc">How predatory algorithms extract attention and how to deploy the Viveka Firewall.</p>
                             </div>
                         </div>
 
+                        <!-- Episode 02 -->
                         <div class="glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-purple-500/50 transition-all group cursor-pointer" onclick="openVideoModal('life-2')">
                             <div class="relative h-44 bg-gradient-to-tr from-indigo-950 via-slate-900 to-slate-950 flex items-center justify-center p-4">
+                                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-indigo-600/80 text-white font-bold text-[10px] tracking-wider uppercase">Episode 02</span>
+                                <span class="absolute top-3 right-3 px-2 py-0.5 rounded-md bg-amber-500/30 border border-amber-500/40 text-amber-300 font-bold text-[9px] uppercase tracking-wider">Coming Soon Teaser</span>
                                 <div class="w-12 h-12 rounded-full bg-purple-600 text-white flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition-transform">
                                     <i class="fa-solid fa-play ml-0.5"></i>
                                 </div>
                             </div>
                             <div class="p-5 space-y-2">
-                                <h4 class="font-bold text-white text-sm" data-i18n="tr2Title">Trailer 02: Thermodynamic Entropy</h4>
-                                <p class="text-xs text-slate-400" data-i18n="tr2Desc">Deconstructing physical friction, isolated systems, and systemic alignment.</p>
+                                <h4 class="font-bold text-white text-sm" data-i18n="ep2Title">Episode 02: Thermodynamic Entropy</h4>
+                                <p class="text-xs text-slate-400" data-i18n="ep2Desc">Deconstructing physical friction, isolated systems, and systemic alignment.</p>
                             </div>
                         </div>
 
+                        <!-- Episode 03 -->
                         <div class="glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-purple-500/50 transition-all group cursor-pointer" onclick="openVideoModal('life-3')">
                             <div class="relative h-44 bg-gradient-to-tr from-cyan-950 via-slate-900 to-slate-950 flex items-center justify-center p-4">
+                                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-cyan-600/80 text-white font-bold text-[10px] tracking-wider uppercase">Episode 03</span>
+                                <span class="absolute top-3 right-3 px-2 py-0.5 rounded-md bg-amber-500/30 border border-amber-500/40 text-amber-300 font-bold text-[9px] uppercase tracking-wider">Coming Soon Teaser</span>
                                 <div class="w-12 h-12 rounded-full bg-purple-600 text-white flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition-transform">
                                     <i class="fa-solid fa-play ml-0.5"></i>
                                 </div>
                             </div>
                             <div class="p-5 space-y-2">
-                                <h4 class="font-bold text-white text-sm" data-i18n="tr3Title">Trailer 03: The 16 Core Diagnostics</h4>
-                                <p class="text-xs text-slate-400" data-i18n="tr3Desc">Running the on-screen diagnostic queries to secure your mental baseline.</p>
+                                <h4 class="font-bold text-white text-sm" data-i18n="ep3Title">Episode 03: The 16 Core Diagnostics</h4>
+                                <p class="text-xs text-slate-400" data-i18n="ep3Desc">Running the on-screen diagnostic queries to secure your mental baseline.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- PUBLICATION SECTION WITH BOOK PURCHASE LINKS -->
                 <div class="glass-card p-8 rounded-2xl border border-purple-500/30 space-y-6 bg-gradient-to-r from-purple-950/40 to-slate-900">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                        <div class="space-y-2">
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                        <div class="space-y-2 max-w-2xl">
                             <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold border border-purple-500/30">Official Publication</span>
                             <h3 class="text-2xl font-bold font-heading text-white">Get Life-Algo Series Part I - The Master Code & Companion Guide</h3>
-                            <p class="text-sm text-slate-300 max-w-2xl">
+                            <p class="text-sm text-slate-300">
                                 Access the complete unabridged digital book, physical hardcover options, and the companion workbook with step-by-step exercises.
                             </p>
                         </div>
                         <div class="flex flex-col sm:flex-row gap-3 shrink-0">
-                            <button onclick="openVideoModal('master-trailer')" class="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-lg flex items-center justify-center gap-2 cursor-pointer">
-                                <i class="fa-solid fa-book-open"></i> Preview Sample Chapters
+                            <a href="#" onclick="showToast('Hardcover Edition selected. Redirecting to official store...', 'success'); return false;" class="px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs shadow-lg flex items-center justify-center gap-2 cursor-pointer transition-all">
+                                <i class="fa-solid fa-cart-shopping"></i> Buy Hardcover
+                            </a>
+                            <a href="#" onclick="showToast('Kindle / eBook Edition selected. Redirecting to Amazon/Digital store...', 'success'); return false;" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 font-bold text-xs shadow-lg flex items-center justify-center gap-2 cursor-pointer transition-all">
+                                <i class="fa-solid fa-tablet-screen-button"></i> Buy Kindle / eBook
+                            </a>
+                            <button onclick="openVideoModal('master-trailer')" class="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-lg flex items-center justify-center gap-2 cursor-pointer transition-all">
+                                <i class="fa-solid fa-book-open"></i> Sample Chapters
                             </button>
                         </div>
                     </div>
                 </div>
 
+                <!-- EXECUTION SUITE -->
                 <div class="space-y-6">
                     <div class="border-b border-slate-800 pb-4">
                         <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest block mb-1">Execution Suite</span>
@@ -691,6 +734,7 @@
             </section>
         </div>
 
+        <!-- VIEW: E2FY-EDU -->
         <div id="view-edu" class="page-transition page-hidden">
             <section class="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-center">
                 <div>
@@ -724,6 +768,7 @@
             </section>
         </div>
 
+        <!-- VIEW: E2FY-HEALTH -->
         <div id="view-health" class="page-transition page-hidden">
             <section class="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-center">
                 <div>
@@ -759,13 +804,13 @@
 
     </main>
 
-    <!-- VIDEO MODAL WITH GOOGLE DRIVE / YOUTUBE SUPPORT -->
+    <!-- VIDEO MODAL WITH GOOGLE DRIVE SUPPORT -->
     <div id="video-modal" class="fixed inset-0 z-50 hidden bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4">
         <div class="relative w-full max-w-4xl glass-card rounded-2xl overflow-hidden border border-slate-700 shadow-2xl flex flex-col max-h-[92vh]">
             <div class="p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
                 <div class="flex items-center gap-3">
                     <span class="flex h-3 w-3 rounded-full bg-red-500 animate-pulse"></span>
-                    <span id="video-modal-title" class="text-sm font-bold font-heading text-white truncate max-w-md">E2FY Video Trailer Player</span>
+                    <span id="video-modal-title" class="text-sm font-bold font-heading text-white truncate max-w-md">E2FY Video Player</span>
                 </div>
                 <button onclick="closeVideoModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs cursor-pointer">
                     <i class="fa-solid fa-xmark"></i>
@@ -775,15 +820,15 @@
             <div class="relative bg-black h-64 sm:h-96 flex flex-col items-center justify-center overflow-hidden shrink-0" id="video-player-wrapper"></div>
 
             <div class="p-4 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 shrink-0">
-                <span id="video-modal-fallback-note">If player displays error, watch directly on YouTube:</span>
-                <a id="video-modal-yt-link" href="https://www.youtube.com/watch?v=bFIVYRfyb3E" target="_blank" class="px-3 py-1 rounded bg-red-600 text-white font-bold hover:bg-red-500"><i class="fa-brands fa-youtube mr-1"></i> Open on YouTube</a>
+                <span id="video-modal-fallback-note">If player displays error, watch directly on source:</span>
+                <a id="video-modal-yt-link" href="https://drive.google.com/file/d/14CMJQdbjsYWtEc9MO55HdXX09DHQqmL4/view?usp=sharing" target="_blank" class="px-3 py-1 rounded bg-blue-600 text-white font-bold hover:bg-blue-500"><i class="fa-brands fa-google-drive mr-1"></i> Open on Google Drive</a>
             </div>
         </div>
     </div>
 
-    <!-- ENHANCED AUDIT MODAL WITH ALL 5 QUESTIONS -->
+    <!-- LIVE AUDIT MODAL (UPDATED: VISIBLE POINTS REMOVED FROM CHOICE LABELS) -->
     <div id="audit-modal" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="relative w-full max-w-2xl glass-card rounded-2xl overflow-hidden border border-slate-700 shadow-2xl flex flex-col max-h-[90vh]">
+        <div class="relative w-full max-w-3xl glass-card rounded-2xl overflow-hidden border border-slate-700 shadow-2xl flex flex-col max-h-[90vh]">
             <div class="p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-gauge-high text-cyan-400"></i>
@@ -793,89 +838,210 @@
             </div>
             
             <div class="p-6 overflow-y-auto space-y-6 text-slate-300 text-xs sm:text-sm flex-1" id="audit-body">
-                <!-- Question Set -->
                 <div id="audit-questions" class="space-y-6">
-                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-                        <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider block mb-1">Q1: Viveka Firewall (Morning Input Protocol)</span>
-                        <h4 class="font-bold text-white text-sm mb-3">How do you interact with your phone/notifications during your first 30 minutes awake?</h4>
+                    
+                    <!-- Q1: VIVEKA FIREWALL -->
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider">Act I / Q1: Viveka Firewall (Morning Protocol)</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-bold">Input Audit</span>
+                        </div>
+                        <h4 class="font-bold text-white text-sm">How do you interact with your phone and digital notifications during your first 30 minutes awake?</h4>
                         <div class="space-y-2">
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-purple-500/50">
-                                <input type="radio" name="q1" value="0" class="mt-0.5" checked>
-                                <span>Check social media, emails, or news immediately (High Algorithmic Hijack).</span>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-purple-500/50 transition-colors">
+                                <input type="radio" name="q1" value="0" class="mt-1" checked>
+                                <div>
+                                    <span class="font-bold text-white block text-xs">A. Total Matrix Hijack</span>
+                                    <span class="text-slate-400 text-[11px]">Grab my phone immediately in bed, scroll social media/news, and check notifications before getting up.</span>
+                                </div>
                             </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-purple-500/50">
-                                <input type="radio" name="q1" value="2" class="mt-0.5">
-                                <span>Pause for 15-30 min of breathwork, reflection, and setting intention before touching screens.</span>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-purple-500/50 transition-colors">
+                                <input type="radio" name="q1" value="1" class="mt-1">
+                                <div>
+                                    <span class="font-bold text-white block text-xs">B. Reactive Rush</span>
+                                    <span class="text-slate-400 text-[11px]">Check chats or urgent messages briefly, then rush through my morning routine feeling hurried and distracted.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-purple-500/50 transition-colors">
+                                <input type="radio" name="q1" value="2" class="mt-1">
+                                <div>
+                                    <span class="font-bold text-white block text-xs">C. Conscious Pause</span>
+                                    <span class="text-slate-400 text-[11px]">Keep phone on Do Not Disturb for 15 minutes while drinking water, stretching, or doing light exercise.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-purple-500/50 transition-colors">
+                                <input type="radio" name="q1" value="3" class="mt-1">
+                                <div>
+                                    <span class="font-bold text-white block text-xs">D. Sovereign Viveka Firewall</span>
+                                    <span class="text-slate-400 text-[11px]">Zero screens for 30+ minutes; execute Sadhana Panchakam morning wisdom download, breathwork, and set daily intention.</span>
+                                </div>
                             </label>
                         </div>
                     </div>
 
-                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-                        <span class="text-[10px] font-bold text-cyan-400 uppercase tracking-wider block mb-1">Q2: Karma Yog (Work & Study Bandwidth)</span>
-                        <h4 class="font-bold text-white text-sm mb-3">When studying for exams or working on major projects, where is your attention focused?</h4>
+                    <!-- Q2: SATSANG ENGINE -->
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-cyan-400 uppercase tracking-wider">Act II / Q2: Satsang Engine (Social & Peer Calibration)</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-bold">Peer Audit</span>
+                        </div>
+                        <h4 class="font-bold text-white text-sm">How do you handle social media trends, group peer pressure, and public validation (likes/comments)?</h4>
                         <div class="space-y-2">
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-cyan-500/50">
-                                <input type="radio" name="q2" value="0" class="mt-0.5" checked>
-                                <span>Obsessing over test ranks, boss reviews, and fear of failure.</span>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-cyan-500/50 transition-colors">
+                                <input type="radio" name="q2" value="0" class="mt-1" checked>
+                                <div>
+                                    <span class="font-bold text-white block text-xs">A. Algorithmic Comparison Loop</span>
+                                    <span class="text-slate-400 text-[11px]">Obsess over likes, views, and comments; constantly compare my real life to others' curated highlight reels.</span>
+                                </div>
                             </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-cyan-500/50">
-                                <input type="radio" name="q2" value="2" class="mt-0.5">
-                                <span>Directing 100% focus to quality of effort as an offering (Yajna), surrendering unmanageable outcomes.</span>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-cyan-500/50 transition-colors">
+                                <input type="radio" name="q2" value="1" class="mt-1">
+                                <div>
+                                    <span class="font-bold text-white block text-xs">B. Competitive Secret Envy</span>
+                                    <span class="text-slate-400 text-[11px]">Feel envious of peers' online status, but try to post better content or buy trendy items to stay competitive.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-cyan-500/50 transition-colors">
+                                <input type="radio" name="q2" value="2" class="mt-1">
+                                <div>
+                                    <span class="font-bold text-white block text-xs">C. Selective Filter Mode</span>
+                                    <span class="text-slate-400 text-[11px]">Filter my feeds to follow inspiring educational accounts; step back from toxic gossip groups and arguments.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-cyan-500/50 transition-colors">
+                                <input type="radio" name="q2" value="3" class="mt-1">
+                                <div>
+                                    <span class="font-bold text-white block text-xs">D. Unshakeable Atman Calibration</span>
+                                    <span class="text-slate-400 text-[11px]">Run the Satsang Engine: My self-worth is anchored internally; external trends and praise/blame cannot move my center.</span>
+                                </div>
                             </label>
                         </div>
                     </div>
 
-                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-                        <span class="text-[10px] font-bold text-amber-400 uppercase tracking-wider block mb-1">Q3: Friction Control (Chaos & Amygdala)</span>
-                        <h4 class="font-bold text-white text-sm mb-3">How do you react when unexpected delays, failures, or online criticism occur?</h4>
+                    <!-- Q3: KARMA YOG EXECUTION -->
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-amber-400 uppercase tracking-wider">Act III / Q3: Karma Yog (Performance & Exams)</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">Focus Audit</span>
+                        </div>
+                        <h4 class="font-bold text-white text-sm">When studying for major exams, leading projects, or competing in sports, where is your attention focused?</h4>
                         <div class="space-y-2">
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-amber-500/50">
-                                <input type="radio" name="q3" value="0" class="mt-0.5" checked>
-                                <span>Amygdala panic, anger, blaming myself or others, feeling ruined.</span>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-amber-500/50 transition-colors">
+                                <input type="radio" name="q3" value="0" class="mt-1" checked>
+                                <div>
+                                    <span class="font-bold text-white block text-xs">A. Amygdala Panic Hijack</span>
+                                    <span class="text-slate-400 text-[11px]">Paralyzed by fear of failure, obsessing over test ranks, grade cuts, boss reviews, or disappointing parents.</span>
+                                </div>
                             </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-amber-500/50">
-                                <input type="radio" name="q3" value="2" class="mt-0.5">
-                                <span>Maintain calm non-linear problem solving, refine my inputs cleanly, and keep zero internal heat.</span>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-amber-500/50 transition-colors">
+                                <input type="radio" name="q3" value="1" class="mt-1">
+                                <div>
+                                    <span class="font-bold text-white block text-xs">B. Clock-Watching Friction</span>
+                                    <span class="text-slate-400 text-[11px]">Study or work hard, but constantly check the clock, calculate test odds, and worry about winning vs. losing.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-amber-500/50 transition-colors">
+                                <input type="radio" name="q3" value="2" class="mt-1">
+                                <div>
+                                    <span class="font-bold text-white block text-xs">C. Disciplined Step Execution</span>
+                                    <span class="text-slate-400 text-[11px]">Focus on the current study topic step-by-step; take deliberate breaks to calm nerve pressure and avoid burnouts.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-amber-500/50 transition-colors">
+                                <input type="radio" name="q3" value="3" class="mt-1">
+                                <div>
+                                    <span class="font-bold text-white block text-xs">D. Karma Yog / Yajna Bhavana</span>
+                                    <span class="text-slate-400 text-[11px]">Direct 100% focus to quality of effort as a sacred offering to the Supreme Source; surrender outcome anxiety completely.</span>
+                                </div>
                             </label>
                         </div>
                     </div>
 
-                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-                        <span class="text-[10px] font-bold text-rose-400 uppercase tracking-wider block mb-1">Q4: Relational Interdependence (Gita 3.14 & 4.24)</span>
-                        <h4 class="font-bold text-white text-sm mb-3">How do you approach relationships with peers, family, or colleagues?</h4>
+                    <!-- Q4: ONENESS FIELD -->
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-rose-400 uppercase tracking-wider">Act IV / Q4: Oneness Field (Conflict & Relational Harmony)</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-bold">Relational Audit</span>
+                        </div>
+                        <h4 class="font-bold text-white text-sm">How do you react when a peer, sibling, or competitor criticizes you, disagrees, or wins a prize?</h4>
                         <div class="space-y-2">
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-rose-500/50">
-                                <input type="radio" name="q4" value="0" class="mt-0.5" checked>
-                                <span>Transactional mindset ("I did this for you, so you owe me"), comparing status.</span>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-rose-500/50 transition-colors">
+                                <input type="radio" name="q4" value="0" class="mt-1" checked>
+                                <div>
+                                    <span class="font-bold text-white block text-xs">A. Reactive Flare-Up</span>
+                                    <span class="text-slate-400 text-[11px]">Explode in anger, hold a long grudge, or try to tear them down verbally or online to protect my pride.</span>
+                                </div>
                             </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-rose-500/50">
-                                <input type="radio" name="q4" value="2" class="mt-0.5">
-                                <span>Recognizing mutual cosmic interdependence and serving the divine life-force in others.</span>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-rose-500/50 transition-colors">
+                                <input type="radio" name="q4" value="1" class="mt-1">
+                                <div>
+                                    <span class="font-bold text-white block text-xs">B. Silent Territory Guarding</span>
+                                    <span class="text-slate-400 text-[11px]">Feel bitter inside, hiding study notes or withholding help so I score higher or keep my group advantage.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-rose-500/50 transition-colors">
+                                <input type="radio" name="q4" value="2" class="mt-1">
+                                <div>
+                                    <span class="font-bold text-white block text-xs">C. Anti-Vithanda Shield</span>
+                                    <span class="text-slate-400 text-[11px]">Take a deep breath, listen calmly without arguing back, and step away from useless, draining drama.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-rose-500/50 transition-colors">
+                                <input type="radio" name="q4" value="3" class="mt-1">
+                                <div>
+                                    <span class="font-bold text-white block text-xs">D. Tat Tvam Asi Oneness</span>
+                                    <span class="text-slate-400 text-[11px]">Recognize the same universal life-force flowing in my competitor (Golden Pot = Mud Puddle); celebrate their success.</span>
+                                </div>
                             </label>
                         </div>
                     </div>
 
-                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-                        <span class="text-[10px] font-bold text-teal-400 uppercase tracking-wider block mb-1">Q5: Swarajya Kernel (Nightly Reset)</span>
-                        <h4 class="font-bold text-white text-sm mb-3">How do you transition into sleep at the end of the day?</h4>
+                    <!-- Q5: SWARAJYA KERNEL -->
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-teal-400 uppercase tracking-wider">Act V / Q5: Swarajya Kernel (Nightly Reset & Autonomy)</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 font-bold">Autonomy Audit</span>
+                        </div>
+                        <h4 class="font-bold text-white text-sm">How do you transition into rest at the end of the day, and how dependent are you on gadgets for joy?</h4>
                         <div class="space-y-2">
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-teal-500/50">
-                                <input type="radio" name="q5" value="0" class="mt-0.5" checked>
-                                <span>Replaying anxieties, doomscrolling until passing out, feeling insecure.</span>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-teal-500/50 transition-colors">
+                                <input type="radio" name="q5" value="0" class="mt-1" checked>
+                                <div>
+                                    <span class="font-bold text-white block text-xs">A. Device Co-Dependency</span>
+                                    <span class="text-slate-400 text-[11px]">Doomscroll or watch short videos until passing out; replay anxieties and negative scenarios in bed.</span>
+                                </div>
                             </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-teal-500/50">
-                                <input type="radio" name="q5" value="2" class="mt-0.5">
-                                <span>Forgiving errors, releasing all outcomes into the macro-system, and resting in sovereign peace.</span>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-teal-500/50 transition-colors">
+                                <input type="radio" name="q5" value="1" class="mt-1">
+                                <div>
+                                    <span class="font-bold text-white block text-xs">B. Unsettled Mental Loop</span>
+                                    <span class="text-slate-400 text-[11px]">Put screens away right before sleep, but lay awake worrying about tomorrow's task list and pending chores.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-teal-500/50 transition-colors">
+                                <input type="radio" name="q5" value="2" class="mt-1">
+                                <div>
+                                    <span class="font-bold text-white block text-xs">C. Unplugged Digital Fast</span>
+                                    <span class="text-slate-400 text-[11px]">Turn off all screens 20 minutes before bed, do a brief mental review of the day, and relax in quiet.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer hover:border-teal-500/50 transition-colors">
+                                <input type="radio" name="q5" value="3" class="mt-1">
+                                <div>
+                                    <span class="font-bold text-white block text-xs">D. Heart Treehouse Retirement</span>
+                                    <span class="text-slate-400 text-[11px]">Retire to my internal Heart Treehouse: Disconnect all gadgets, forgive all errors, and dissolve local worries into cosmic peace.</span>
+                                </div>
                             </label>
                         </div>
                     </div>
+
                 </div>
 
-                <!-- Results Container -->
+                <!-- RESULTS VIEW -->
                 <div id="audit-results" class="hidden space-y-6 text-center">
                     <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
                         <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest block">Your Sovereign Intelligence Index</span>
-                        <div class="text-5xl font-black font-heading text-white" id="score-display">0 / 10</div>
+                        <div class="text-5xl font-black font-heading text-white" id="score-display">0 / 15</div>
                         <div class="text-sm font-bold" id="score-status">Calculating...</div>
                         <p class="text-xs text-slate-300 max-w-md mx-auto leading-relaxed" id="score-recommendation">Recommendation loading...</p>
                     </div>
@@ -954,7 +1120,7 @@
                 pr0Badge: "Principle 0 / 5 : Trigger and Driver",
                 pr0Title: "Compounding Experience into Wisdom",
                 pr0Desc: "Life is a journey with experiences (good or bad). Compounding experiences with evidence builds Wisdom; this helps us in knowing what to do next with confidence.",
-                pr0Watch: "Watch Foundation Video Guide",
+                pr0Watch: "Watch Foundation Guide Video",
                 pr0WatchBtn: "Watch Video",
                 pr0BoxTitle: "The Trigger & Driver",
                 pr0BoxDesc: "Escaping the Matrix hack loop through compounded wisdom.",
@@ -1007,15 +1173,15 @@
                 seriesBadge: "E2FY-Life Series",
                 part1MainTitle: "Life-Algo Series Part I - The Master Code",
                 part1MainSub: "Foundational Architecture, Viveka Firewall & Scientific Proofs",
-                otherLangTitle: "Other Languages & Editions",
-                otherLangSub: "Select Book Edition Language",
-                trailerSeriesTitle: "Life-Algo Series Part I Video Trailer Series",
-                tr1Title: "Trailer 01: The Matrix in Your Pocket",
-                tr1Desc: "How predatory algorithms extract attention and how to deploy the Viveka Firewall.",
-                tr2Title: "Trailer 02: Thermodynamic Entropy",
-                tr2Desc: "Deconstructing physical friction, isolated systems, and systemic alignment.",
-                tr3Title: "Trailer 03: The 16 Core Diagnostics",
-                tr3Desc: "Running the on-screen diagnostic queries to secure your mental baseline.",
+                otherLangTitle: "Other Languages",
+                otherLangSub: "Select Edition",
+                bookInsightTitle: "Book Insight Episodes",
+                ep1Title: "Episode 01: The Matrix in Your Pocket",
+                ep1Desc: "How predatory algorithms extract attention and how to deploy the Viveka Firewall.",
+                ep2Title: "Episode 02: Thermodynamic Entropy",
+                ep2Desc: "Deconstructing physical friction, isolated systems, and systemic alignment.",
+                ep3Title: "Episode 03: The 16 Core Diagnostics",
+                ep3Desc: "Running the on-screen diagnostic queries to secure your mental baseline.",
                 eduMainTitle: "E2FY-EDU",
                 eduSub: "Education as Yajna: Disarming Exam Panic & Rote Learning",
                 eduLaunchTitle: "Launching Soon for Students & Universities",
@@ -1110,15 +1276,15 @@
                 seriesBadge: "E2FY-வாழ்வியல் தொடர்",
                 part1MainTitle: "வாழ்வியல்-அல்காரிதம் பகுதி I - மாஸ்டர் கோட்",
                 part1MainSub: "அடிப்படைக் கட்டமைப்பு, விவேக ஃபயர்வால் & அறிவியல் சான்றுகள்",
-                otherLangTitle: "பிற மொழிகள் & பதிப்புகள்",
-                otherLangSub: "புத்தகப் பதிப்பு மொழியைத் தேர்ந்தெடுக்கவும்",
-                trailerSeriesTitle: "வாழ்வியல்-அல்காரிதம் பகுதி I வீடியோ டிரெய்லர் தொடர்",
-                tr1Title: "டிரெய்லர் 01: உங்கள் பாக்கெட்டில் உள்ள மேட்ரிக்ஸ்",
-                tr1Desc: "வேட்டையாடும் அல்காரிதம்கள் கவனத்தை எவ்வாறு உறிஞ்சுகின்றன.",
-                tr2Title: "டிரெய்லர் 02: வெப்ப இயக்கவியல் என்ட்ரோபி",
-                tr2Desc: "உடல் உராய்வு மற்றும் முறையான சீரமைப்பை பிரித்து ஆராய்தல்.",
-                tr3Title: "டிரெய்லர் 03: 16 முக்கிய கண்டறிதல்கள்",
-                tr3Desc: "மனதின் அடிப்படையைப் பாதுகாக்க திரையில் உள்ள வினவல்களை இயக்குதல்.",
+                otherLangTitle: "பிற மொழிகள்",
+                otherLangSub: "பதிப்பைத் தேர்வு செய்க",
+                bookInsightTitle: "புத்தகப் நுண்ணறிவு அத்தியாயங்கள்",
+                ep1Title: "பாகம் 01: உங்கள் பாக்கெட்டில் உள்ள மேட்ரிக்ஸ்",
+                ep1Desc: "வேட்டையாடும் அல்காரிதம்கள் கவனத்தை எவ்வாறு உறிஞ்சுகின்றன.",
+                ep2Title: "பாகம் 02: வெப்ப இயக்கவியல் என்ட்ரோபி",
+                ep2Desc: "உடல் உராய்வு மற்றும் முறையான சீரமைப்பை பிரித்து ஆராய்தல்.",
+                ep3Title: "பாகம் 03: 16 முக்கிய கண்டறிதல்கள்",
+                ep3Desc: "மனதின் அடிப்படையைப் பாதுகாக்க திரையில் உள்ள வினவல்களை இயக்குதல்.",
                 eduMainTitle: "E2FY-கல்வி",
                 eduSub: "யக்ஞம் போன்ற கல்வி: தேர்வு பீதி & மனப்பாடக் கல்வியை ஒழித்தல்",
                 eduLaunchTitle: "மாணவர்கள் & பல்கலைக்கழகங்களுக்கு விரைவில் வருகிறது",
@@ -1138,29 +1304,37 @@
             'principle-0': {
                 title: 'E2FY Foundation Guide: Trigger & Driver',
                 desc: 'Compounding experience into wisdom and escaping the Matrix hack loop.',
-                youtubeId: 'bFIVYRfyb3E'
+                isDrive: true,
+                driveUrl: 'https://drive.google.com/file/d/14CMJQdbjsYWtEc9MO55HdXX09DHQqmL4/view?usp=sharing',
+                driveEmbedUrl: 'https://drive.google.com/file/d/14CMJQdbjsYWtEc9MO55HdXX09DHQqmL4/preview'
             },
             'master-trailer': {
-                title: 'E2FY Master Overview: Upgrade Your Mind',
-                desc: 'A comprehensive introduction to E2FY, Sanatana Dharma frameworks, neuroscience, and thermodynamics.',
+                title: 'Official Book Launch Trailer: Life-Algo Series Part I',
+                desc: 'Cinematic book trailer introducing the Master Code, Viveka Firewall, and thermodynamic mind OS.',
                 isDrive: true,
-                driveUrl: 'https://drive.google.com/file/d/10VlmX0UbpNuF5oIAMMhNs7fzBsqOjFhG/view?usp=sharing',
-                driveEmbedUrl: 'https://drive.google.com/file/d/10VlmX0UbpNuF5oIAMMhNs7fzBsqOjFhG/preview'
+                driveUrl: 'https://drive.google.com/file/d/14CMJQdbjsYWtEc9MO55HdXX09DHQqmL4/view?usp=sharing',
+                driveEmbedUrl: 'https://drive.google.com/file/d/14CMJQdbjsYWtEc9MO55HdXX09DHQqmL4/preview'
             },
             'life-1': {
-                title: 'E2FY-Life Ep 01: The Matrix in Your Pocket',
-                desc: 'How predatory algorithms extract your attention and how to deploy the Viveka Firewall.',
-                youtubeId: 'bFIVYRfyb3E'
+                title: 'Book Insight Episode 01: The Matrix in Your Pocket (Coming Soon Teaser)',
+                desc: 'Teaser Preview: How predatory algorithms extract your attention and how to deploy the Viveka Firewall.',
+                isDrive: true,
+                driveUrl: 'https://drive.google.com/file/d/14CMJQdbjsYWtEc9MO55HdXX09DHQqmL4/view?usp=sharing',
+                driveEmbedUrl: 'https://drive.google.com/file/d/14CMJQdbjsYWtEc9MO55HdXX09DHQqmL4/preview'
             },
             'life-2': {
-                title: 'E2FY-Life Ep 02: Thermodynamic Entropy',
-                desc: 'Deconstructing physical friction, isolated systems, and systemic alignment.',
-                youtubeId: 'bFIVYRfyb3E'
+                title: 'Book Insight Episode 02: Thermodynamic Entropy (Coming Soon Teaser)',
+                desc: 'Teaser Preview: Deconstructing physical friction, isolated systems, and systemic alignment.',
+                isDrive: true,
+                driveUrl: 'https://drive.google.com/file/d/14CMJQdbjsYWtEc9MO55HdXX09DHQqmL4/view?usp=sharing',
+                driveEmbedUrl: 'https://drive.google.com/file/d/14CMJQdbjsYWtEc9MO55HdXX09DHQqmL4/preview'
             },
             'life-3': {
-                title: 'E2FY-Life Ep 03: The 16 Core Diagnostics',
-                desc: 'Running on-screen diagnostic queries to secure your mental baseline.',
-                youtubeId: 'bFIVYRfyb3E'
+                title: 'Book Insight Episode 03: The 16 Core Diagnostics (Coming Soon Teaser)',
+                desc: 'Teaser Preview: Running on-screen diagnostic queries to secure your mental baseline.',
+                isDrive: true,
+                driveUrl: 'https://drive.google.com/file/d/14CMJQdbjsYWtEc9MO55HdXX09DHQqmL4/view?usp=sharing',
+                driveEmbedUrl: 'https://drive.google.com/file/d/14CMJQdbjsYWtEc9MO55HdXX09DHQqmL4/preview'
             }
         };
 
@@ -1291,24 +1465,28 @@
             if (r) r.classList.remove('hidden');
             
             const scoreDisplay = document.getElementById('score-display');
-            if (scoreDisplay) scoreDisplay.innerText = `${score} / 10`;
+            if (scoreDisplay) scoreDisplay.innerText = `${score} / 15`;
 
             const statusEl = document.getElementById('score-status');
             const recEl = document.getElementById('score-recommendation');
             const patchEl = document.getElementById('score-patch-text');
 
-            if (score >= 8) {
+            if (score >= 13) {
                 if (statusEl) { statusEl.innerText = "Sovereign Master (Unhackable OS)"; statusEl.className = "text-sm font-bold text-emerald-400"; }
-                if (recEl) recEl.innerText = "Your Viveka Firewall is functioning optimally. Continue maintaining your daily Sadhana Panchakam schedule and deepening your Yajna Bhavana practice.";
-                if (patchEl) patchEl.innerText = "Patch: Deepen Brahma-Karma awareness in daily tasks and mentor younger peers.";
-            } else if (score >= 4) {
-                if (statusEl) { statusEl.innerText = "System Friction Detected (Moderate Hijack)"; statusEl.className = "text-sm font-bold text-amber-400"; }
-                if (recEl) recEl.innerText = "You are experiencing moderate cognitive friction caused by outcome anxiety or digital distraction. Deploy Karma Yog execution protocols.";
-                if (patchEl) patchEl.innerText = "Patch: Implement Q1 morning Viveka pause (no phone first 30 mins) and detach from exam/review ranks.";
+                if (recEl) recEl.innerText = "Exceptional alignment! Your Viveka Firewall is active and your mind OS operates on pure Karma Yog & Swarajya sovereignty.";
+                if (patchEl) patchEl.innerText = "Patch: Deepen Brahma-Karma awareness during complex daily tasks and mentor younger peers to build unhackable networks.";
+            } else if (score >= 9) {
+                if (statusEl) { statusEl.innerText = "High Integration (Resilient Mindset)"; statusEl.className = "text-sm font-bold text-cyan-400"; }
+                if (recEl) recEl.innerText = "Strong internal baseline. You maintain high focus and discipline, with occasional mild friction during peak stress.";
+                if (patchEl) patchEl.innerText = "Patch: Implement the 30-minute morning Viveka screen fast and practice Tat Tvam Asi non-dual equality when dealing with difficult peers.";
+            } else if (score >= 5) {
+                if (statusEl) { statusEl.innerText = "System Friction (Moderate Hijack)"; statusEl.className = "text-sm font-bold text-amber-400"; }
+                if (recEl) recEl.innerText = "Moderate cognitive energy leakage detected. Social media trends, exam stress, or outcome anxiety are causing internal lag.";
+                if (patchEl) patchEl.innerText = "Patch: Deploy Karma Yog execution (100% effort, 0% outcome obsession) and disconnect screens 20 minutes before sleep.";
             } else {
-                if (statusEl) { statusEl.innerText = "Critical Algorithmic Hijack (High Entropy)"; statusEl.className = "text-sm font-bold text-rose-400"; }
-                if (recEl) recEl.innerText = "Your attention span and nervous system are currently being commanded by external matrix algorithms. Immediate Master Code reset required.";
-                if (patchEl) patchEl.innerText = "Patch: Initialize 7-day screen audit, load Sadhana Panchakam 6-block daily routine, and practice outcome detachment.";
+                if (statusEl) { statusEl.innerText = "Critical Matrix Hijack (High Entropy)"; statusEl.className = "text-sm font-bold text-rose-400"; }
+                if (recEl) recEl.innerText = "Your attention span, nervous system, and sleep patterns are currently being commanded by external algorithms and panic loops.";
+                if (patchEl) patchEl.innerText = "Patch: Initialize a 7-day digital declutter, adopt the Sadhana Panchakam morning routine, and retire to the Heart Treehouse every night.";
             }
 
             const btn = document.getElementById('audit-action-btn');
@@ -1338,22 +1516,26 @@
         function nextPrinciple() {
             currentPrincipleIndex = (currentPrincipleIndex + 1) % 6;
             updatePrinciplesCarousel();
+            restartPrinciplesAuto();
         }
 
         function prevPrinciple() {
             currentPrincipleIndex = (currentPrincipleIndex - 1 + 6) % 6;
             updatePrinciplesCarousel();
+            restartPrinciplesAuto();
         }
 
         function goToPrinciple(index) {
             currentPrincipleIndex = index;
             updatePrinciplesCarousel();
+            restartPrinciplesAuto();
         }
 
         function startPrinciplesAuto() {
             if (principlesAutoInterval) clearInterval(principlesAutoInterval);
             principlesAutoInterval = setInterval(() => {
-                nextPrinciple();
+                currentPrincipleIndex = (currentPrincipleIndex + 1) % 6;
+                updatePrinciplesCarousel();
             }, 6000);
         }
 
@@ -1362,6 +1544,11 @@
         }
 
         function resumePrinciplesAuto() {
+            startPrinciplesAuto();
+        }
+
+        function restartPrinciplesAuto() {
+            pausePrinciplesAuto();
             startPrinciplesAuto();
         }
 
@@ -1418,8 +1605,8 @@
                 const btn = document.getElementById(`edition-btn-${l}`);
                 if (btn) {
                     btn.className = l === editionLang 
-                        ? "px-4 py-2 rounded-xl bg-cyan-600 text-white font-bold text-xs transition-all flex items-center gap-2 shadow-md cursor-pointer"
-                        : "px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 font-bold text-xs transition-all flex items-center gap-2 cursor-pointer";
+                        ? "flex-1 py-1.5 px-3 rounded-lg bg-cyan-600 text-white font-bold text-[11px] transition-all flex items-center justify-center gap-1 cursor-pointer"
+                        : "flex-1 py-1.5 px-3 rounded-lg bg-slate-900 text-slate-300 hover:bg-slate-800 font-bold text-[11px] transition-all flex items-center justify-center gap-1 cursor-pointer";
                 }
             });
 
@@ -1428,41 +1615,37 @@
 
             if (editionLang === 'ta') {
                 container.innerHTML = `
-                    <div class="p-5 rounded-xl bg-slate-900/90 border border-amber-500/50 space-y-4">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                            <span class="font-bold text-white text-base">தமிழ் பதிப்பு (Tamil Edition - Life-Algo Series Part I - The Master Code)</span>
-                            <span class="text-xs px-3 py-1.5 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">COMING SOON / விரைவில்</span>
+                    <div class="p-2.5 rounded-lg bg-slate-900/90 border border-amber-500/40 space-y-1.5 mt-1">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-[11px]">தமிழ் பதிப்பு (Tamil Edition)</span>
+                            <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">விரைவில்</span>
                         </div>
-                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                            The authorized Tamil translation of Life-Algo Series Part I - The Master Code is currently in preparation. Designed with authentic Tamil terminology for Viveka Firewall, Karma Yog, and Swarajya Kernel.
+                        <p class="text-[10px] text-slate-300 leading-tight">
+                            The authorized Tamil edition is in preparation.
                         </p>
-                        <form onsubmit="handleNotifySubmit(event)" class="space-y-3 pt-2">
-                            <div class="flex flex-col sm:flex-row gap-2">
-                                <input type="email" required placeholder="Enter your email for Tamil edition launch..." class="flex-1 px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-500">
-                                <button type="submit" class="px-5 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs hover:bg-amber-400 transition-colors inline-flex items-center gap-2 shrink-0 cursor-pointer">
-                                    <i class="fa-solid fa-bell"></i> Notify Me for Tamil Edition
-                                </button>
-                            </div>
+                        <form onsubmit="handleNotifySubmit(event)" class="pt-1 flex gap-1">
+                            <input type="email" required placeholder="Email for Tamil edition..." class="flex-1 px-2 py-1 rounded bg-slate-950 border border-slate-700 text-[10px] text-white focus:outline-none">
+                            <button type="submit" class="px-2 py-1 rounded bg-amber-500 text-slate-950 font-bold text-[10px] hover:bg-amber-400 shrink-0 cursor-pointer">
+                                Notify
+                            </button>
                         </form>
                     </div>
                 `;
             } else if (editionLang === 'hi') {
                 container.innerHTML = `
-                    <div class="p-5 rounded-xl bg-slate-900/90 border border-amber-500/50 space-y-4">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                            <span class="font-bold text-white text-base">हिन्दी संस्करण (Hindi Edition - Life-Algo Series Part I - The Master Code)</span>
-                            <span class="text-xs px-3 py-1.5 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">COMING SOON</span>
+                    <div class="p-2.5 rounded-lg bg-slate-900/90 border border-amber-500/40 space-y-1.5 mt-1">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-[11px]">हिन्दी संस्करण (Hindi Edition)</span>
+                            <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">COMING SOON</span>
                         </div>
-                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                            The Hindi edition of Life-Algo Series Part I - The Master Code is slated for publication soon. Pre-orders and early access notifications will open shortly.
+                        <p class="text-[10px] text-slate-300 leading-tight">
+                            The Hindi edition will open pre-orders shortly.
                         </p>
-                        <form onsubmit="handleNotifySubmit(event)" class="space-y-3 pt-2">
-                            <div class="flex flex-col sm:flex-row gap-2">
-                                <input type="email" required placeholder="Enter your email for Hindi edition launch..." class="flex-1 px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-500">
-                                <button type="submit" class="px-5 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs hover:bg-amber-400 transition-colors inline-flex items-center gap-2 shrink-0 cursor-pointer">
-                                    <i class="fa-solid fa-bell"></i> Notify Me for Hindi Edition
-                                </button>
-                            </div>
+                        <form onsubmit="handleNotifySubmit(event)" class="pt-1 flex gap-1">
+                            <input type="email" required placeholder="Email for Hindi edition..." class="flex-1 px-2 py-1 rounded bg-slate-950 border border-slate-700 text-[10px] text-white focus:outline-none">
+                            <button type="submit" class="px-2 py-1 rounded bg-amber-500 text-slate-950 font-bold text-[10px] hover:bg-amber-400 shrink-0 cursor-pointer">
+                                Notify
+                            </button>
                         </form>
                     </div>
                 `;
@@ -1498,9 +1681,50 @@
             });
         }
 
+        function setupCarouselTouchSwipe() {
+            const container = document.getElementById('principles-carousel-container');
+            if (!container) return;
+
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            container.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            container.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                if (touchStartX - touchEndX > 40) {
+                    nextPrinciple();
+                } else if (touchEndX - touchStartX > 40) {
+                    prevPrinciple();
+                }
+            }, { passive: true });
+        }
+
         window.onload = function() {
             switchBookEdition('ta');
             startPrinciplesAuto();
+            setupCarouselTouchSwipe();
+
+            setTimeout(() => {
+                const hash = window.location.hash.toUpperCase();
+                if (hash === '#LAP1') {
+                    navigateTo('life-part1');
+                } else if (hash === '#HOME') {
+                    navigateTo('home');
+                } else if (hash === '#LIFE') {
+                    navigateTo('life');
+                } else if (hash === '#EDU') {
+                    navigateTo('edu');
+                } else if (hash === '#HEALTH' || hash === '#HLTH') {
+                    navigateTo('health');
+                } else if (hash === '#PRIN') {
+                    navigateTo('home', 'principles');
+                } else if (hash === '#REV') {
+                    navigateTo('home', 'testimonials');
+                }
+            }, 150);
         };
     </script>
 </body>
